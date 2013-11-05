@@ -35,7 +35,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <location filename="expodialog.ui" line="100"/>
         <location filename="expodialog.ui" line="330"/>
         <source>GV</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="132"/>
@@ -45,47 +45,47 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
     <message>
         <location filename="expodialog.ui" line="141"/>
         <source>0</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="151"/>
         <source>1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="161"/>
         <source>2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="171"/>
         <source>3</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="181"/>
         <source>4</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="191"/>
         <source>5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="201"/>
         <source>6</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="211"/>
         <source>7</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="221"/>
         <source>8</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="296"/>
@@ -269,7 +269,7 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="173"/>
         <source>MAVLink Baud Rate</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="392"/>
@@ -680,7 +680,7 @@ Ta wartość będzei dodana do zmierzonegej wartości napięcia zasilania.  Uży
     <message>
         <location filename="generaledit.ui" line="796"/>
         <source>NMEA</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="650"/>
@@ -744,7 +744,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="1294"/>
         <source>Optrex</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1502"/>
@@ -856,7 +856,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="381"/>
         <source>PPMSim</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="182"/>
@@ -1038,7 +1038,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
         <location filename="generaledit.ui" line="2800"/>
         <location filename="generaledit.ui" line="2875"/>
         <source>----</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="2805"/>
@@ -1597,7 +1597,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1492"/>
         <source>Copyright</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1493"/>
@@ -1629,12 +1629,12 @@ Zapisać mimo wszytko?</translation>
         <location filename="mainwindow.cpp" line="2019"/>
         <location filename="mainwindow.cpp" line="2040"/>
         <source>&amp;%1 %2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1565"/>
         <source>%1 %2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1592"/>
@@ -1694,7 +1694,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1617"/>
         <source>Ctrl+G</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1618"/>
@@ -1819,7 +1819,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1678"/>
         <source>Ctrl+Alt+W</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1679"/>
@@ -1834,7 +1834,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1683"/>
         <source>Ctrl+Alt+R</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1684"/>
@@ -1919,7 +1919,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1717"/>
         <source>Alt+S</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1718"/>
@@ -1934,7 +1934,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1723"/>
         <source>Ctrl+P</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1724"/>
@@ -2208,7 +2208,7 @@ Zapisać mimo wszytko?</translation>
         <location filename="mdichild.cpp" line="189"/>
         <location filename="mdichild.cpp" line="472"/>
         <source>companion9x</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="184"/>
@@ -2305,7 +2305,7 @@ Zapisać ?</translation>
     <message>
         <location filename="mixerdialog.ui" line="20"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="397"/>
@@ -2479,47 +2479,47 @@ Ustala w jaki sposób miksery są łączone.
     <message>
         <location filename="mixerdialog.ui" line="221"/>
         <source>0</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="231"/>
         <source>1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="241"/>
         <source>2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="251"/>
         <source>3</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="261"/>
         <source>4</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="271"/>
         <source>5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="281"/>
         <source>6</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="291"/>
         <source>7</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="301"/>
         <source>8</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="32"/>
@@ -2572,12 +2572,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mixerdialog.cpp" line="17"/>
         <source>DEST -&gt; X%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.cpp" line="19"/>
         <source>DEST -&gt; CH%1%2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.cpp" line="105"/>
@@ -2611,7 +2611,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="20"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="33"/>
@@ -2798,17 +2798,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="988"/>
         <source>P1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="995"/>
         <source>P2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1002"/>
         <source>P3</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2555"/>
@@ -2832,8 +2832,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="2562"/>
         <location filename="modeledit.ui" line="3225"/>
         <source>CH04</source>
-        <translatorcomment>Kanał 04</translatorcomment>
-        <translation></translation>
+        <translation>Kanał 04</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2751"/>
@@ -2944,7 +2943,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="953"/>
         <source>REa</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="352"/>
@@ -2992,7 +2991,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="1009"/>
         <source>REb</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="299"/>
@@ -3021,22 +3020,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="382"/>
         <source>GEA</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="393"/>
         <source>ID0</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="398"/>
         <source>ID1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="403"/>
         <source>ID2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2127"/>
@@ -3438,42 +3437,42 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="489"/>
         <source>SB</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="505"/>
         <source>SD</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="521"/>
         <source>SA</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="645"/>
         <source>SC</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="707"/>
         <source>SG</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="723"/>
         <source>SE</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="831"/>
         <source>SF</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1016"/>
         <source>RS</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1613"/>
@@ -3835,13 +3834,13 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="19258"/>
         <location filename="modeledit.ui" line="19908"/>
         <source>V2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19277"/>
         <location filename="modeledit.ui" line="19927"/>
         <source>V1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2354"/>
@@ -4554,7 +4553,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5858"/>
         <location filename="modeledit.cpp" line="5882"/>
         <source>Ctrl+Up</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="200"/>
@@ -4570,7 +4569,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5859"/>
         <location filename="modeledit.cpp" line="5883"/>
         <source>Ctrl+Down</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="203"/>
@@ -4604,7 +4603,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="1627"/>
         <location filename="modeledit.cpp" line="1734"/>
         <source>CH%1%2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1551"/>
@@ -4615,17 +4614,17 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="622"/>
         <source>S1</source>
-        <translation type="unfinished"></translation>
+        <translation>Potencjometr 1</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="623"/>
         <source>S2</source>
-        <translation type="unfinished"></translation>
+        <translation>Potencjometr 2</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="624"/>
         <source>LS</source>
-        <translation type="unfinished"></translation>
+        <translation>Lewy suwak</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1155"/>
@@ -4664,7 +4663,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="1625"/>
         <location filename="modeledit.cpp" line="1732"/>
         <source>X%1  </source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1690"/>
@@ -4679,7 +4678,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="1698"/>
         <source>FMTrim</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1702"/>
@@ -4707,7 +4706,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="2248"/>
         <location filename="modeledit.cpp" line="2255"/>
         <source>CH %1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="2749"/>
@@ -4727,7 +4726,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="3420"/>
         <source>Winged Shadow How High</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3422"/>
@@ -4748,22 +4747,22 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="3627"/>
         <source>T-Cut</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3628"/>
         <source>Sticky T-Cut</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3629"/>
         <source>V-Tail</source>
-        <translation></translation>
+        <translation>Ustrzenie motylkowe(V-tail)</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3630"/>
         <source>Elevon\Delta</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3632"/>
@@ -4840,7 +4839,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5849"/>
         <location filename="modeledit.cpp" line="5873"/>
         <source>Ctrl+A</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="5850"/>
@@ -4852,7 +4851,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5850"/>
         <location filename="modeledit.cpp" line="5874"/>
         <source>Enter</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="5852"/>
@@ -4884,7 +4883,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5950"/>
         <location filename="modeledit.cpp" line="5975"/>
         <source>Ctrl+C</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="5854"/>
@@ -4900,7 +4899,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5951"/>
         <location filename="modeledit.cpp" line="5976"/>
         <source>Ctrl+X</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="5855"/>
@@ -4916,7 +4915,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5952"/>
         <location filename="modeledit.cpp" line="5977"/>
         <source>Ctrl+V</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="5856"/>
@@ -4928,7 +4927,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="5856"/>
         <location filename="modeledit.cpp" line="5880"/>
         <source>Ctrl+U</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6186"/>
@@ -5102,7 +5101,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="92"/>
         <source>Ctrl+C</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="93"/>
@@ -5112,7 +5111,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="93"/>
         <source>Ctrl+X</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="94"/>
@@ -5122,7 +5121,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="94"/>
         <source>Ctrl+V</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="95"/>
@@ -5132,7 +5131,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="95"/>
         <source>Ctrl+U</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="97"/>
@@ -5147,7 +5146,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="99"/>
         <source>Alt+R</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="101"/>
@@ -5157,7 +5156,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="101"/>
         <source>Alt+S</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="276"/>
@@ -5247,25 +5246,25 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>S1</source>
-        <translation></translation>
+        <translation>Potencjometr 1</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>S2</source>
-        <translation></translation>
+        <translation>Potencjometr 2</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>LS</source>
-        <translation></translation>
+        <translation>Lewy suwak</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>RS</source>
-        <translation></translation>
+        <translation>Prawy suwak</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="251"/>
@@ -5300,42 +5299,42 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SA</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SB</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SC</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SD</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SE</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SF</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SG</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SH</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="268"/>
@@ -5370,17 +5369,17 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>T1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>Tx</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>Rx</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
@@ -5390,12 +5389,12 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>RSSI</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>T2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
@@ -5425,7 +5424,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>Vfas</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
@@ -5435,7 +5434,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>Cnsp</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
@@ -5445,97 +5444,97 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>AccX</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>AccY</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>AccZ</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>HDG </source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>VSpd</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>A1-</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>A2-</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Alt-</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Alt+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Rpm+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>T1+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>T2+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Spd+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Dst+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="273"/>
         <source>Cur+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="273"/>
         <source>ACC </source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="273"/>
         <source>Time</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="273"/>
         <source>Pwr+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="296"/>
         <source>MAX</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="276"/>
@@ -5767,22 +5766,22 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="302"/>
         <source>CYC%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="304"/>
         <source>PPM%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="307"/>
         <source>CH%1%2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="309"/>
         <source>X%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="283"/>
@@ -5790,7 +5789,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="eeprominterface.cpp" line="407"/>
         <location filename="helpers.cpp" line="478"/>
         <source>----</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="260"/>
@@ -5860,12 +5859,12 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="660"/>
         <source>th9x</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="662"/>
         <source>er9x</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1123"/>
@@ -6245,7 +6244,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="open9xinterface.cpp" line="1309"/>
         <source>Bluetooth interface</source>
-        <translation></translation>
+        <translation>Interface Bluetooth</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1142"/>
@@ -6275,7 +6274,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="671"/>
         <source>ersky9x</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="285"/>
@@ -6474,47 +6473,47 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>English</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>French</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>Italian</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>German</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>Czech</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>Slovak</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>Spanish</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>Portuguese</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="66"/>
         <source>CH</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="73"/>
@@ -6605,12 +6604,12 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="139"/>
         <source>Reset</source>
-        <translation></translation>
+        <translation>Zresetuj</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="141"/>
         <source>Vario</source>
-        <translation></translation>
+        <translation>Wariometr</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="145"/>
@@ -6673,12 +6672,12 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="1192"/>
         <source>Winged Shadow How High</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1194"/>
         <source>Winged Shadow How High (not supported)</source>
-        <translation>Winged Shadow How High (nie obbsługiwane)</translation>
+        <translation>Winged Shadow How High (nie obsługiwane)</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1196"/>
@@ -6743,7 +6742,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="1342"/>
         <source>: %1 Channels, %2usec Delay</source>
-        <translation>: %1 Kanał, %2us opóżnienie</translation>
+        <translation>:Kanały  %1, opóźnienie %2usX</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1358"/>
@@ -6774,7 +6773,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="helpers.cpp" line="28"/>
         <location filename="helpers.cpp" line="1181"/>
         <source>---</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="28"/>
@@ -6799,7 +6798,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="28"/>
         <source>Rot Enc</source>
-        <translation></translation>
+        <translation>Pokrętło</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="155"/>
@@ -6851,14 +6850,14 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="helpers.cpp" line="340"/>
         <location filename="helpers.cpp" line="414"/>
         <source>Timer1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="268"/>
         <location filename="helpers.cpp" line="341"/>
         <location filename="helpers.cpp" line="415"/>
         <source>Timer2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="342"/>
@@ -6920,7 +6919,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="509"/>
         <source>Expo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="549"/>
@@ -7170,7 +7169,7 @@ Zespół openTX/C9x.</translation>
     <message>
         <location filename="avroutputdialog.ui" line="32"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="avroutputdialog.ui" line="63"/>
@@ -7491,7 +7490,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burnconfigdialog.ui" line="647"/>
         <source>ARM MCU</source>
-        <translation></translation>
+        <translation>Procesor ARM</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="667"/>
@@ -7524,7 +7523,7 @@ m2560 dla platformy V4</translation>
         <location filename="burnconfigdialog.cpp" line="328"/>
         <location filename="burnconfigdialog.cpp" line="397"/>
         <source>companion9x</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.cpp" line="329"/>
@@ -7572,7 +7571,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burndialog.ui" line="213"/>
         <source>SVN</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MOD/Build</source>
@@ -7606,7 +7605,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burndialog.ui" line="456"/>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="390"/>
@@ -7808,7 +7807,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="comparedialog.ui" line="29"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.ui" line="53"/>
@@ -7857,13 +7856,13 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="253"/>
         <location filename="comparedialog.cpp" line="276"/>
         <source>Timer1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="255"/>
         <location filename="comparedialog.cpp" line="278"/>
         <source>Timer2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="257"/>
@@ -7986,7 +7985,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="355"/>
         <location filename="comparedialog.cpp" line="444"/>
         <source>Rot. Enc.</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="498"/>
@@ -8011,7 +8010,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="1308"/>
         <location filename="comparedialog.cpp" line="1426"/>
         <source>Min</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="501"/>
@@ -8020,7 +8019,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="1308"/>
         <location filename="comparedialog.cpp" line="1426"/>
         <source>Max</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="501"/>
@@ -8037,13 +8036,13 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="877"/>
         <location filename="comparedialog.cpp" line="1188"/>
         <source>CH</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="526"/>
         <location filename="comparedialog.cpp" line="553"/>
         <source>INV</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="526"/>
@@ -8060,7 +8059,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="580"/>
         <location filename="comparedialog.cpp" line="593"/>
         <source>GV</source>
-        <translation>ZG</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="615"/>
@@ -8077,7 +8076,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="652"/>
         <location filename="comparedialog.cpp" line="731"/>
         <source>Expo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="693"/>
@@ -8104,7 +8103,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="828"/>
         <location filename="comparedialog.cpp" line="911"/>
         <source>FMTrim</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="832"/>
@@ -8176,7 +8175,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="1062"/>
         <location filename="comparedialog.cpp" line="1064"/>
         <source>CS</source>
-        <translation>WP</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Function Switches</source>
@@ -8209,7 +8208,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="1215"/>
         <location filename="comparedialog.cpp" line="1332"/>
         <source>Analog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1215"/>
@@ -8229,19 +8228,19 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="1336"/>
         <location filename="comparedialog.cpp" line="1359"/>
         <source>A%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1230"/>
         <location filename="comparedialog.cpp" line="1347"/>
         <source>Alarm 1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1230"/>
         <location filename="comparedialog.cpp" line="1347"/>
         <source>Alarm 2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1232"/>
@@ -8313,7 +8312,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="1262"/>
         <location filename="comparedialog.cpp" line="1379"/>
         <source>RSSI Alarm</source>
-        <translation></translation>
+        <translation>Alarm RSSI</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1307"/>
@@ -8360,7 +8359,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="contributorsdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="14"/>
@@ -8426,7 +8425,7 @@ z którego wyrósł companion9x.</translation>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="182"/>
@@ -8446,7 +8445,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="customizesplashdialog.ui" line="212"/>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="245"/>
@@ -8548,7 +8547,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="downloaddialog.cpp" line="54"/>
         <source>companion9x</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="downloaddialog.cpp" line="55"/>
@@ -8944,7 +8943,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="logsdialog.ui" line="131"/>
         <source>Zoom</source>
-        <translation></translation>
+        <translation>Przybliżenie</translation>
     </message>
     <message>
         <location filename="logsdialog.ui" line="138"/>
@@ -9087,37 +9086,37 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="modelconfigdialog.ui" line="369"/>
         <source>Swash Plate</source>
-        <translation type="unfinished">Tarcza</translation>
+        <translation>Tarcza</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="379"/>
         <source>Swash plate</source>
-        <translation type="unfinished">Tarcza</translation>
+        <translation>Tarcza</translation>
     </message>
     <message utf8="true">
         <location filename="modelconfigdialog.ui" line="387"/>
         <source>90° / Fixed / Coax</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="modelconfigdialog.ui" line="392"/>
         <source>120°</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="modelconfigdialog.ui" line="397"/>
         <source>120X°</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="modelconfigdialog.ui" line="402"/>
         <source>140°</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="407"/>
         <source>FlyBarLess</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="428"/>
@@ -9268,7 +9267,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1080"/>
         <location filename="modelconfigdialog.ui" line="1139"/>
         <source>AUTO</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="763"/>
@@ -9279,7 +9278,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1085"/>
         <location filename="modelconfigdialog.ui" line="1144"/>
         <source>CH01</source>
-        <translation type="unfinished">Kanał 01</translation>
+        <translation>Kanał 01</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="768"/>
@@ -9290,7 +9289,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1090"/>
         <location filename="modelconfigdialog.ui" line="1149"/>
         <source>CH02</source>
-        <translation type="unfinished">Kanał 01</translation>
+        <translation>Kanał 01</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="773"/>
@@ -9301,7 +9300,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1095"/>
         <location filename="modelconfigdialog.ui" line="1154"/>
         <source>CH03</source>
-        <translation type="unfinished">Kanał 03</translation>
+        <translation>Kanał 03</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="778"/>
@@ -9312,7 +9311,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1100"/>
         <location filename="modelconfigdialog.ui" line="1159"/>
         <source>CH04</source>
-        <translation type="unfinished">Kanał 04</translation>
+        <translation>Kanał 04</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="783"/>
@@ -9323,7 +9322,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1105"/>
         <location filename="modelconfigdialog.ui" line="1164"/>
         <source>CH05</source>
-        <translation type="unfinished">Kanał 05</translation>
+        <translation>Kanał 05</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="788"/>
@@ -9334,7 +9333,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1110"/>
         <location filename="modelconfigdialog.ui" line="1169"/>
         <source>CH06</source>
-        <translation type="unfinished">Kanał 06</translation>
+        <translation>Kanał 06</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="793"/>
@@ -9345,7 +9344,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1115"/>
         <location filename="modelconfigdialog.ui" line="1174"/>
         <source>CH07</source>
-        <translation type="unfinished">Kanał 07</translation>
+        <translation>Kanał 07</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="798"/>
@@ -9356,7 +9355,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1120"/>
         <location filename="modelconfigdialog.ui" line="1179"/>
         <source>CH08</source>
-        <translation type="unfinished">Kanał 08</translation>
+        <translation>Kanał 08</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="803"/>
@@ -9367,7 +9366,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1125"/>
         <location filename="modelconfigdialog.ui" line="1184"/>
         <source>CH09</source>
-        <translation type="unfinished">Kanał 09</translation>
+        <translation>Kanał 09</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="808"/>
@@ -9378,7 +9377,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="modelconfigdialog.ui" line="1130"/>
         <location filename="modelconfigdialog.ui" line="1189"/>
         <source>CH10</source>
-        <translation type="unfinished">Kanał 10</translation>
+        <translation>Kanał 10</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="816"/>
@@ -9458,7 +9457,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="preferencesdialog.ui" line="148"/>
         <location filename="preferencesdialog.ui" line="215"/>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="164"/>
@@ -9486,7 +9485,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="preferencesdialog.ui" line="353"/>
         <source>FwInfo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="360"/>
@@ -9565,7 +9564,7 @@ Moze być inny od języka firmware</translation>
         <location filename="preferencesdialog.ui" line="1585"/>
         <location filename="preferencesdialog.ui" line="1598"/>
         <source>CheckBox</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="433"/>
@@ -9654,7 +9653,7 @@ This is used by the templated to determine which channel goes to what number out
     <message>
         <location filename="preferencesdialog.ui" line="964"/>
         <source>Firmware</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="663"/>
@@ -9740,7 +9739,7 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.ui" line="740"/>
         <source>Joystick</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="754"/>
@@ -9912,7 +9911,7 @@ Mode 4:
     <message>
         <location filename="printdialog.ui" line="26"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.ui" line="58"/>
@@ -9960,12 +9959,12 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="134"/>
         <source>Timer1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="135"/>
         <source>Timer2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="136"/>
@@ -10034,7 +10033,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="174"/>
         <source>Rot.Enc.</source>
-        <translation></translation>
+        <translation>Pokrętło.</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="176"/>
@@ -10109,7 +10108,7 @@ Mode 4:
         <location filename="printdialog.cpp" line="504"/>
         <location filename="printdialog.cpp" line="828"/>
         <source>CH</source>
-        <translation></translation>
+        <translation>Kanał</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="372"/>
@@ -10119,7 +10118,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="374"/>
         <source>FMTrim</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="376"/>
@@ -10171,7 +10170,7 @@ Mode 4:
         <location filename="printdialog.cpp" line="518"/>
         <location filename="printdialog.cpp" line="953"/>
         <source>Min</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="461"/>
@@ -10179,7 +10178,7 @@ Mode 4:
         <location filename="printdialog.cpp" line="523"/>
         <location filename="printdialog.cpp" line="953"/>
         <source>Max</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="466"/>
@@ -10193,7 +10192,7 @@ Mode 4:
         <location filename="printdialog.cpp" line="498"/>
         <location filename="printdialog.cpp" line="530"/>
         <source>INV</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="468"/>
@@ -10330,7 +10329,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="896"/>
         <source>A%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="911"/>
@@ -10476,32 +10475,32 @@ Mode 4:
         <location filename="simulatordialog.ui" line="746"/>
         <location filename="simulatordialog.ui" line="756"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="470"/>
         <source>TRN</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="497"/>
         <source>GEA</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="530"/>
         <source>ID0</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="566"/>
         <source>ID1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="599"/>
         <source>ID2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="844"/>
@@ -10513,7 +10512,7 @@ Mode 4:
         <location filename="simulatordialog.ui" line="926"/>
         <location filename="simulatordialog.ui" line="983"/>
         <source>0 %</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="901"/>
@@ -10725,7 +10724,7 @@ Mode 4:
         <location filename="simulatordialog.ui" line="3525"/>
         <location filename="simulatordialog.ui" line="3547"/>
         <source>-100.1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2419"/>
@@ -10845,7 +10844,7 @@ Mode 4:
         <location filename="splashlibrary.ui" line="47"/>
         <location filename="splashlibrary.ui" line="946"/>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="splashlibrary.cpp" line="58"/>
@@ -10885,25 +10884,25 @@ Mode 4:
         <location filename="xsimulatordialog.ui" line="1111"/>
         <location filename="xsimulatordialog.ui" line="1114"/>
         <source>SF</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="1061"/>
         <location filename="xsimulatordialog.ui" line="1199"/>
         <source>SE</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="963"/>
         <location filename="xsimulatordialog.ui" line="1179"/>
         <source>SA</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="907"/>
         <location filename="xsimulatordialog.ui" line="1189"/>
         <source>SB</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="347"/>
@@ -10919,7 +10918,7 @@ Mode 4:
         <location filename="xsimulatordialog.ui" line="873"/>
         <location filename="xsimulatordialog.ui" line="883"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="240"/>
@@ -10949,49 +10948,49 @@ Mode 4:
         <location filename="xsimulatordialog.ui" line="514"/>
         <location filename="xsimulatordialog.ui" line="575"/>
         <source>SH</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="437"/>
         <location filename="xsimulatordialog.ui" line="565"/>
         <source>SG</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="264"/>
         <location filename="xsimulatordialog.ui" line="555"/>
         <source>SD</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="304"/>
         <location filename="xsimulatordialog.ui" line="545"/>
         <source>SC</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="377"/>
         <location filename="xsimulatordialog.ui" line="585"/>
         <source>S2</source>
-        <translation></translation>
+        <translation>Potencjometr 2</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="480"/>
         <location filename="xsimulatordialog.ui" line="595"/>
         <source>RS</source>
-        <translation></translation>
+        <translation>Prawy suwak</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="843"/>
         <location filename="xsimulatordialog.ui" line="1219"/>
         <source>S1</source>
-        <translation></translation>
+        <translation>Potencjometr 1</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="1157"/>
         <location filename="xsimulatordialog.ui" line="1209"/>
         <source>LS</source>
-        <translation></translation>
+        <translation>Lewy suwak</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="1424"/>
@@ -11026,7 +11025,7 @@ Mode 4:
         <location filename="xsimulatordialog.ui" line="2769"/>
         <location filename="xsimulatordialog.ui" line="2791"/>
         <source>-100.1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="1663"/>
