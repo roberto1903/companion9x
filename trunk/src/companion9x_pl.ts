@@ -557,7 +557,7 @@ Dopuszczalne wartości 5-10</translation>
     <message>
         <location filename="generaledit.ui" line="728"/>
         <source>GEA</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="735"/>
@@ -9030,7 +9030,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="modelconfigdialog.ui" line="256"/>
         <source>Wing</source>
-        <translation>Delta</translation>
+        <translation>Skrzydła</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="272"/>
@@ -9087,12 +9087,12 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="modelconfigdialog.ui" line="369"/>
         <source>Swash Plate</source>
-        <translation>Swash Plate</translation>
+        <translation type="unfinished">Tarcza</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="379"/>
         <source>Swash plate</source>
-        <translation>Swash Plate</translation>
+        <translation type="unfinished">Tarcza</translation>
     </message>
     <message utf8="true">
         <location filename="modelconfigdialog.ui" line="387"/>
