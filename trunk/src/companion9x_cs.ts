@@ -840,32 +840,32 @@ který kanál patří ke kterému výstupu.</translation>
     <message>
         <location filename="generaledit.ui" line="282"/>
         <source>Single Beep Every whole Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Pípnutí každou celou minutu</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="302"/>
         <source>Flash backlight on timer beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Při upozornění stopek blikne podsvětlením</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="490"/>
         <source>LCD Screen Contrast\nValues can be 20-45</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrast LCD\nHodnoty mohou být 20-45</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1232"/>
         <source>Will alert if there&apos;s not a lot of memory left</source>
-        <translation type="unfinished"></translation>
+        <translation>Upozorní pokud už nezbývá mnoho paměti</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1440"/>
         <source>This is the switch selection for turning on the backlight (if installed).</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybetre spínač který bude spínat podsvětlení displeje (pokud je instalováno).</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1474"/>
         <source>Will alert if the throttle is not at idle during startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Upozorní pokud není při zapnutí rádia plyn v nulové poloze</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1616"/>
@@ -1298,7 +1298,7 @@ Opravdu to takto chcete ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="173"/>
         <source>Display previous message again at startup ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcete zobrazit předchozí upozornění i příště ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="350"/>
@@ -1308,7 +1308,7 @@ Opravdu to takto chcete ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="353"/>
         <source>Compilation server temporary failure, try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompilační server je dočasně nedostupný, zkuste to prosím později</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="356"/>
@@ -1320,7 +1320,7 @@ Opravdu to takto chcete ?</translation>
         <location filename="mainwindow.cpp" line="359"/>
         <location filename="mainwindow.cpp" line="399"/>
         <source>Compilation server requires registration, please check opentx web site</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompilační server požaduje registraci, navštivte prosím webové stránky opentx</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="362"/>
@@ -2364,7 +2364,7 @@ Pokud není uveden je mix aktivní pořád.</translation>
     <message>
         <location filename="mixerdialog.ui" line="460"/>
         <source>Fix Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravit Ofset</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="467"/>
@@ -3851,7 +3851,7 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
     <message>
         <location filename="modeledit.ui" line="1292"/>
         <source>Master/Trainer Port</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1359"/>
@@ -4230,25 +4230,25 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <location filename="modeledit.ui" line="21454"/>
         <source>Sink Max</source>
         <oldsource>Sunk Max</oldsource>
-        <translation type="unfinished">Klesání Max</translation>
+        <translation>Klesání Max</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21577"/>
         <source>Climb Max</source>
         <oldsource>Raise Max</oldsource>
-        <translation type="unfinished">Stoupání Max</translation>
+        <translation>Stoupání Max</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21593"/>
         <source>Sink Min</source>
         <oldsource>Sunk Min</oldsource>
-        <translation type="unfinished">Klesání Min</translation>
+        <translation>Klesání Min</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21609"/>
         <source>Climb Min</source>
         <oldsource>Raise Min</oldsource>
-        <translation type="unfinished">Stoupání Min</translation>
+        <translation>Stoupání Min</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="22762"/>
@@ -4681,7 +4681,7 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
     <message>
         <location filename="modeledit.cpp" line="2782"/>
         <source>CF%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fn%1</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3111"/>
@@ -5994,7 +5994,7 @@ Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkc
     <message>
         <location filename="open9xinterface.cpp" line="1308"/>
         <source>Use FrSky Taranis sticks in a 9X/9XR</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít páky z Frsky Taranis v 9X/XR</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1316"/>
@@ -7161,7 +7161,11 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
 We are really sensible to that!
 
 The openTX/C9X Team.</source>
-        <translation type="unfinished"></translation>
+        <translation>Všem děkujeme za příspěvky, dobré nápady a konstruktivní návrhy atd. k připravovanému modelu financování openTX/C9x.
+
+Vážíme si toho a nasloucháme !
+
+Tým openTX/C9X. </translation>
     </message>
 </context>
 <context>
@@ -8332,7 +8336,7 @@ m2560 pro V4 desky</translation>
     <message>
         <location filename="comparedialog.cpp" line="1126"/>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>Fn</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1456"/>
@@ -9475,7 +9479,7 @@ Může být jiná než verze firmwaru</translation>
     <message>
         <location filename="preferencesdialog.ui" line="987"/>
         <source>Server access code</source>
-        <translation type="unfinished"></translation>
+        <translation>Přístupový kód k serveru</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="1065"/>
@@ -10323,7 +10327,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="857"/>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>Fn</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="972"/>
