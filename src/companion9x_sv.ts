@@ -615,17 +615,17 @@ Mode 4:
     <message>
         <location line="-182"/>
         <source>Single Beep Every whole Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Varje minut</translation>
     </message>
     <message>
         <location line="+20"/>
         <source>Flash backlight on timer beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Blinka vid pip</translation>
     </message>
     <message>
         <location line="+188"/>
         <source>LCD Screen Contrast\nValues can be 20-45</source>
-        <translation type="unfinished"></translation>
+        <translation>LCD-kontrast\nVärdet kan vara  20-45</translation>
     </message>
     <message>
         <location line="+511"/>
@@ -653,17 +653,17 @@ Mode 4:
     <message>
         <location line="+49"/>
         <source>Will alert if there&apos;s not a lot of memory left</source>
-        <translation type="unfinished"></translation>
+        <translation>Varning vid låg minnesnivå</translation>
     </message>
     <message>
         <location line="+208"/>
         <source>This is the switch selection for turning on the backlight (if installed).</source>
-        <translation type="unfinished"></translation>
+        <translation>Brytaren används för att slå på bakgrundsbelysningen (om installerad).</translation>
     </message>
     <message>
         <location line="+34"/>
         <source>Will alert if the throttle is not at idle during startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Varning för påslagen gas vid start</translation>
     </message>
     <message>
         <location line="+142"/>
@@ -1377,7 +1377,7 @@ Vill du ladda ned den nya versionen nu ?</translation>
         <location line="+6"/>
         <location line="+40"/>
         <source>Compilation server requires registration, please check opentx web site</source>
-        <translation>Du måste ha registrerat dig för att använda byggservern. Läs mer på websidan för openTX.</translation>
+        <translation>Du måste registrera dig för att använda byggservern. Läs mer på openTX websida</translation>
     </message>
     <message>
         <location line="+88"/>
@@ -9425,7 +9425,7 @@ Tryck på Avbryt för att avburyta kalibreringen</translation>
     <message>
         <location line="+714"/>
         <source>Server access code</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösenord till servern</translation>
     </message>
     <message>
         <location line="+53"/>
