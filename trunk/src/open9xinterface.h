@@ -94,6 +94,7 @@ class Open9xFirmware: public FirmwareInfo {
       addLanguage("se");
       addLanguage("cz");
       addLanguage("es");
+      addLanguage("pl");
       addLanguage("pt");
 
       addTTSLanguage("en");
@@ -103,6 +104,7 @@ class Open9xFirmware: public FirmwareInfo {
       addTTSLanguage("se");
       addTTSLanguage("cz");
       addTTSLanguage("sk");
+      addTTSLanguage("pl");
       addTTSLanguage("pt");
       addTTSLanguage("es");
     }
