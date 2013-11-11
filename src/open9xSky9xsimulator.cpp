@@ -108,6 +108,7 @@ namespace Open9xSky9x {
 #include "../opentx/translations/tts_se.cpp"
 #include "../opentx/translations/tts_it.cpp"
 #include "../opentx/translations/tts_fr.cpp"
+#include "../opentx/translations/tts_pl.cpp"
 #include "../opentx/translations/tts_pt.cpp"
 #include "../opentx/translations/tts_sk.cpp"
 

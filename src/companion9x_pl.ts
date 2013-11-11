@@ -332,7 +332,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="259"/>
         <source>Beeps at 30, 15, 10, and down from5 seconds</source>
-        <translation>Sygnały w 30s, 15s, 10s i odlicznie od 5 sekund do 0</translation>
+        <translation>Sygnały w 30s, 15s, 10s i odliczanie od 5 sekund do 0</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="262"/>
@@ -2683,7 +2683,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="1032"/>
         <source>Throttle2Trig</source>
-        <translation type="unfinished">Wyzwalacz gazu 02   </translation>
+        <translation>Wyzwalacz gazu 02   </translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2086"/>
@@ -6905,7 +6905,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="465"/>
         <source>GVAR</source>
-        <translation>Proměnná</translation>
+        <translation>Zmienna</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="466"/>
@@ -9442,7 +9442,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="preferencesdialog.ui" line="80"/>
         <source>Check for selected Fw updates</source>
-        <translation>Sprawdż aktualizacje firmware</translation>
+        <translation>Sprawdź aktualizacje firmware</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="92"/>
@@ -9491,7 +9491,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="preferencesdialog.ui" line="360"/>
         <source>Check for updates</source>
-        <translation>Sprzedź aktualizacje</translation>
+        <translation>Sprawdź aktualizacje</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="232"/>
