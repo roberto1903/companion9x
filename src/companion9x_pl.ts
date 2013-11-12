@@ -155,7 +155,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <source>General settings used throught the transmitter.
 These will be relevant for all models in the same EEPROM.</source>
         <translation>Główne ustawienia radia.
-Będą one podstawowe dla wszytskich modeli w tym samym EEPROM-ie.</translation>
+Będą one obowiązywać dla wszytskich modeli w tym samym EEPROM-ie.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="117"/>
@@ -203,7 +203,7 @@ Mode 4:
   Right stick:  Elevator, Rudder
 
 </source>
-        <translation>Wybór modu:
+        <translation>Wybór mode:
 
 Mode 1:
   Lewa ręka  :  Ster Wysokości, Ster Kierunku
@@ -236,7 +236,7 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="537"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
-        <translation>Mod 3 (LOT.SW.Gaz.SK)</translation>
+        <translation>Mod 3 (Lot.SW.Gaz.SK)</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="542"/>
@@ -322,7 +322,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Jedno piknięcie w każdą pełną minutę&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Jedno piknięcie co każdą pełną minutę&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="252"/>
@@ -337,7 +337,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="262"/>
         <source>Count Down to Zero</source>
-        <translation>Odlicznie do zera</translation>
+        <translation>Odliczanie do zera</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="269"/>
@@ -481,12 +481,12 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Kontrast ekranu LCD&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Wartośći z zakresu 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Wartości z zakresu 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1351"/>
         <source>Memory Startup Warning</source>
-        <translation>Ostrzezenie o małym zapasie pamięci</translation>
+        <translation>Ostrzeżenie o małym zapasie pamięci</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1014"/>
@@ -524,7 +524,7 @@ p, li { white-space: pre-wrap; }
 This is the threashhold where the battery warning sounds.
 
 Acceptable values are 5v..10v</source>
-        <translation>Ostrzerzenie o napięciu zasilania.
+        <translation>Ostrzeżenie o napięciu zasilania.
 Ustala próg ostrzeżenia.
 
 Dopuszczalne wartości 5-10</translation>
@@ -615,7 +615,7 @@ Dopuszczalne wartości 5-10</translation>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Kalibracja zasilania:
-Ta wartość będzei dodana do zmierzonegej wartości napięcia zasilania.  Użyj tej wartości w celu kalibracji wyświetlanej wartośći napięcia aby była zgodna z wartością napięcia wskazywaną przez miernik.</translation>
+Ta wartość będzie dodana do zmierzonegej wartości napięcia zasilania.  Użyj tej wartości w celu kalibracji wyświetlanego napięcia aby było zgodne z napięciem wskazywanym przez miernik.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1478"/>
@@ -650,7 +650,7 @@ Ta wartość będzei dodana do zmierzonegej wartości napięcia zasilania.  Uży
     <message>
         <location filename="generaledit.ui" line="1072"/>
         <source>Speaker</source>
-        <translation>Głosnik</translation>
+        <translation>Głośnik</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1077"/>
@@ -694,12 +694,12 @@ Ta wartość będzei dodana do zmierzonegej wartości napięcia zasilania.  Uży
 This is used by the templated to determine which channel goes to what number output.</source>
         <translation>Kolejność kanałów
 
-To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do kanałów.</translation>
+To ustawienie jest używane przez szablony, określa jakie wyjście przypisane jest do kanału.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1003"/>
         <source>Speaker Pitch (spkr only)</source>
-        <translation>Wysokość tonów (tylko dzwięki)</translation>
+        <translation>Wysokość tonów (tylko dźwięki)</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1216"/>
@@ -719,7 +719,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="996"/>
         <source>Show Owner Name on Splash</source>
-        <translation>Pokaż imię pilona na ekranie</translation>
+        <translation>Pokaż imię pilota na ekranie</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1732"/>
@@ -751,7 +751,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
-        <translation>To jest przełacznik do włącznie podswietlenia (jeśli zainstalowany).</translation>
+        <translation>To jest przełacznik do włączenia podswietlenia (jeśli zainstalowane).</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1700"/>
@@ -841,7 +841,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="236"/>
         <source>Measurement Units</source>
-        <translation>Jednostki pomiarowe</translation>
+        <translation>Jednostki miar</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="684"/>
@@ -851,7 +851,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="1042"/>
         <source>StickScroll</source>
-        <translation>Przewijanie drązkiem</translation>
+        <translation>Przewijanie drążkiem</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="381"/>
@@ -901,7 +901,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="1690"/>
         <source>Readonly Unlock</source>
-        <translation>Odblokuj &quot;Tylko do odczylu&quot;</translation>
+        <translation>Odblokuj &quot;Tylko do odczytu&quot;</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1763"/>
@@ -1093,7 +1093,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
         <location filename="generaledit.ui" line="3038"/>
         <location filename="generaledit.ui" line="3582"/>
         <source>Mid value</source>
-        <translation>Wartość cetrowania</translation>
+        <translation>Wartość środkowa</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="3048"/>
@@ -1190,7 +1190,7 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="generaledit.cpp" line="1354"/>
         <source>Wrong data in profile, hw related parameters were not retrieved</source>
-        <translation>Błędne dane w profilu, parametry HW nie została odzyskana</translation>
+        <translation>Błędne dane w profilu, parametry HW nie zostały odzyskana</translation>
     </message>
     <message>
         <location filename="generaledit.cpp" line="1379"/>
@@ -1224,7 +1224,7 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="170"/>
         <source>Display previous warning again at startup ?</source>
-        <translation>Wyświetlić poprzednie ostrzeznie przy starcie ?</translation>
+        <translation>Wyświetlić poprzednie ostrzeznie przy uruchomieniu?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="224"/>
@@ -1262,7 +1262,7 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="281"/>
         <source>New release available</source>
-        <translation>Dostepne jest nowe wydanie</translation>
+        <translation>Dostępne jest nowe wydanie</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="281"/>
@@ -1273,7 +1273,7 @@ Jesteś pewien ?</translation>
         <location filename="mainwindow.cpp" line="285"/>
         <location filename="mainwindow.cpp" line="543"/>
         <source>No updates available at this time.</source>
-        <translation>Brak aktualizacji.dostępnych teraz.</translation>
+        <translation>Brak aktualizacji dostępnych teraz.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="295"/>
@@ -1311,12 +1311,12 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="390"/>
         <source>Firmware does not fit in flash, due to selected firmware options</source>
-        <translation>Firmware nie mieści sie w pamięći flash ze zwgledu na wybrane parametry</translation>
+        <translation>Firmware nie mieści się w pamięci flash ze względu na wybrane parametry</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="393"/>
         <source>Compilation server termporary failure, try later</source>
-        <translation>Serwer kompilacji chwilowo nieczynny, spróbuj pózniej</translation>
+        <translation>Serwer kompilacji chwilowo nieczynny, spróbuj później</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="106"/>
@@ -1328,40 +1328,40 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="173"/>
         <source>Display previous message again at startup ?</source>
-        <translation>Czy wyświetlić znów poprzednią informację na starcie?</translation>
+        <translation>Czy ponownie wyświetlić poprzednią informację na starcie?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="350"/>
         <source>Firmware does not longer fit in flash, due to selected firmware options</source>
-        <translation>Firmware dłużej nie mieści sie w pamięći flash ze zwgledu na wybrane parametry</translation>
+        <translation>Firmware już nie mieści sie w pamięci flash ze względu na wybrane parametry</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="353"/>
         <source>Compilation server temporary failure, try later</source>
-        <translation>Serwer kompilacji chwilowo nieczynny, spróbuj pózniej</translation>
+        <translation>Serwer kompilacji chwilowo nieczynny, spróbuj później</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="356"/>
         <location filename="mainwindow.cpp" line="396"/>
         <source>Compilation server too busy, try later</source>
-        <translation>Serwer kompilacji zbyt zajęty, spróbuj pózniej</translation>
+        <translation>Serwer kompilacji zbyt zajęty, spróbuj później</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="359"/>
         <location filename="mainwindow.cpp" line="399"/>
         <source>Compilation server requires registration, please check opentx web site</source>
-        <translation>Serwer kompilacji wymaga rejestracji, prosze odwierdzić stronę opentx</translation>
+        <translation>Serwer kompilacji wymaga rejestracji, proszę odwiedzić stronę opentx</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="362"/>
         <location filename="mainwindow.cpp" line="402"/>
         <source>Unknown server failure, try later</source>
-        <translation>Nieznany bład serwera, spróbuj pózniej</translation>
+        <translation>Nieznany błąd serwera, spróbuj później</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="430"/>
         <source>Do you want to flash the firmware now ?</source>
-        <translation>Chcesz sflaszować radio teraz ?</translation>
+        <translation>Chcesz sflaszować radio teraz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="487"/>
@@ -1370,7 +1370,7 @@ Version %2 is available.
 Do you want to download it now ?</source>
         <translation>Firmware %1 nigdy nie zostało pobrane.
 Dostępna jest wersja %2
-Pobrać teraz ?
+Pobrać teraz?
 </translation>
     </message>
     <message>
@@ -1395,7 +1395,7 @@ Pobrać teraz ?
         <location filename="mainwindow.cpp" line="499"/>
         <location filename="mainwindow.cpp" line="529"/>
         <source>Do you want to download release %1 now ?</source>
-        <translation>Chesz pobrać wydanie %1 teraz ?</translation>
+        <translation>Chesz pobrać wydanie %1 teraz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="516"/>
@@ -1403,7 +1403,7 @@ Pobrać teraz ?
 Do you want to download it now ?</source>
         <translation>Jest dostępna nowa wersja firmware %1
 (aktualna %2 - nowsza %3)
-Chesz pobrać teraz ?</translation>
+Chesz pobrać teraz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="546"/>
@@ -1413,7 +1413,7 @@ Chesz pobrać teraz ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="556"/>
         <source>Release notes contain very important informations. Do you want to see them now ?</source>
-        <translation>Opis wydania zawiera bardzo wazne informacje. Chesz je przeczytać teraz ?</translation>
+        <translation>Opis wydania zawiera bardzo ważne informacje. Chesz je przeczytać teraz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="623"/>
@@ -1434,7 +1434,7 @@ Chesz pobrać teraz ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="770"/>
         <source>Current firmware does not provide release notes informations.</source>
-        <translation>Aktualny firmware nie zawiera opisy wydania.</translation>
+        <translation>Aktualny firmware nie zawiera opisu wydania.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="902"/>
@@ -1459,7 +1459,7 @@ Chesz pobrać teraz ?</translation>
         <location filename="mainwindow.cpp" line="1175"/>
         <location filename="mainwindow.cpp" line="1422"/>
         <source>Impossible to identify the radio on your system, please verify the eeprom disk is connected.</source>
-        <translation>Identyfikacja radia niemozliwa w twoim systemie, prosze sprawdzić podąłczony dysk eeprom.</translation>
+        <translation>Identyfikacja radia niemożliwa w Twoim systemie, prosze sprawdzić podłączony dysk eeprom.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1051"/>
@@ -1510,7 +1510,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1131"/>
         <source>Cannot check eeprom compatibility! Continue anyway?</source>
-        <translation>Nie mogę potwierdzić kompatybilności EEPROM. Kontynuować ?</translation>
+        <translation>Nie mogę potwierdzić kompatybilności EEPROM. Kontynuować?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1138"/>
@@ -1526,7 +1526,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1140"/>
         <source>Firmware in flash is outdated, please upgrade!</source>
-        <translation>Firmware radia jest przedawnione, proszę zauktowalizować!</translation>
+        <translation>Firmware radia jest przestarzały, proszę zaktualizować!</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1180"/>
@@ -1542,12 +1542,12 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1369"/>
         <source>Conversion failed</source>
-        <translation>Konwesja nieudana</translation>
+        <translation>Konwersja nieudana</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1369"/>
         <source>Cannot convert EEProm for this firmware, original EEProm file will be used</source>
-        <translation>Nie mogę skonwertować EEPROM na ten rodzaj firmware, zostanie użyty oryginalny EEPROm</translation>
+        <translation>Nie mogę skonwertować EEPROM na ten rodzaj firmware, zostanie użyty oryginalny EEPROM</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1374"/>
@@ -1602,7 +1602,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1493"/>
         <source>Version %1 (revision %2), %3</source>
-        <translation>Wersja %1 (revize %2), %3</translation>
+        <translation>Wersja %1 (rewizja %2), %3</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1494"/>
@@ -1719,7 +1719,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1626"/>
         <source>Check for new version of companion9x/er9x</source>
-        <translation>Sprzedź nową wersję companion9x/er9x</translation>
+        <translation>Sprawdź nową wersję companion9x/er9x</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1629"/>
@@ -1964,12 +1964,12 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1738"/>
         <source>&amp;Tile</source>
-        <translation>&amp;Tytuł</translation>
+        <translation>&amp;Kafelki</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1739"/>
         <source>Tile the windows</source>
-        <translation>Tytuł okna</translation>
+        <translation>Ustaw okna jak kafelki</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1742"/>
@@ -2014,12 +2014,12 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1766"/>
         <source>Switch layout direction</source>
-        <translation>Zmień kierunek wyglądu</translation>
+        <translation>Odwrócenie interfejsu użytkownika</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1767"/>
         <source>Switch layout Left/Right</source>
-        <translation>Przełącz kierunek wyglądu Lewy/Prawy</translation>
+        <translation>Przełącz wygląd interfejsu Lewy/Prawy</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1787"/>
@@ -2071,7 +2071,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1916"/>
         <source>Burn</source>
-        <translation>Wypiekanie</translation>
+        <translation>Wypalanie</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1928"/>
@@ -2098,7 +2098,7 @@ Zapisać mimo wszytko?</translation>
         <location filename="mainwindow.cpp" line="2124"/>
         <source>Error reading file %1:
 %2.</source>
-        <translation>Bład odczytu pliku %1:
+        <translation>Błąd odczytu pliku %1:
 %2.</translation>
     </message>
     <message>
@@ -2146,7 +2146,7 @@ Zapisać mimo wszytko?</translation>
         <location filename="mdichild.cpp" line="224"/>
         <location filename="mdichild.cpp" line="687"/>
         <source>Unable to find file %1!</source>
-        <translation>Nie mogę odnaleźc pliku %1!</translation>
+        <translation>Nie mogę odnaleźć pliku %1!</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="233"/>
@@ -2155,7 +2155,7 @@ Zapisać mimo wszytko?</translation>
         <location filename="mdichild.cpp" line="696"/>
         <source>Error opening file %1:
 %2.</source>
-        <translation>Bład otwarcia pliku %1:
+        <translation>Błąd otwarcia pliku %1:
 %2.</translation>
     </message>
     <message>
@@ -2167,9 +2167,9 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mdichild.cpp" line="312"/>
         <location filename="mdichild.cpp" line="708"/>
-        <source>Błąd odczytu pliku %1:
+        <source>Error opening file %1:
 %2.</source>
-        <translation>Błąd při otevírání pliku %1:
+        <translation>Błąd odczytu pliku %1:
 %2.</translation>
     </message>
     <message>
@@ -2225,7 +2225,7 @@ Zapisać mimo wszytko?</translation>
         <source>%1 has been modified.
 Do you want to save your changes?</source>
         <translation>%1 został zmieniony.
-Zapisać ?</translation>
+Zapisać?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="516"/>
@@ -2254,7 +2254,7 @@ Zapisać ?</translation>
         <location filename="mdichild.cpp" line="599"/>
         <location filename="mdichild.cpp" line="616"/>
         <source>Impossible to identify the radio on your system, please verify the eeprom disk is connected.</source>
-        <translation>Identyfikacja radia w twoim systemi nie mozliwa, sprawdź dysk eeprom podpięty do komputera.</translation>
+        <translation>Identyfikacja radia w Twoim systemie nie jest możliwa, sprawdź dysk eeprom podpięty do komputera.</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="554"/>
@@ -2266,7 +2266,7 @@ Zapisać ?</translation>
     <message>
         <location filename="mdichild.cpp" line="576"/>
         <source>Cannot check eeprom compatibility! Continue anyway?</source>
-        <translation>Nie mogę sprawdzić kompatybilności EEprom! Kontunuować ?</translation>
+        <translation>Nie mogę sprawdzić kompatybilności EEprom! Kontynuować ?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="583"/>
@@ -2282,7 +2282,7 @@ Zapisać ?</translation>
     <message>
         <location filename="mdichild.cpp" line="586"/>
         <source>Firmware in flash is outdated, please upgrade!</source>
-        <translation>Firmware w radiu jest przestarzały. prosze zautualizować!</translation>
+        <translation>Firmware w radiu jest przestarzały. Proszę zaktualizować!</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="621"/>
@@ -2331,12 +2331,12 @@ Zapisać ?</translation>
         <location filename="mixerdialog.cpp" line="117"/>
         <location filename="mixerdialog.cpp" line="342"/>
         <source>Offset</source>
-        <translation>Dopasowanie</translation>
+        <translation>Przesunięcie</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="425"/>
         <source>Include Trim</source>
-        <translation>Dołącz trymer</translation>
+        <translation>Uwzględnij trymer</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="531"/>
@@ -2374,8 +2374,8 @@ Zapisać ?</translation>
         <location filename="mixerdialog.ui" line="611"/>
         <source>Switch used by the mix.
 If blank then the mix is considered to be &quot;ON&quot; all the time.</source>
-        <translation>Przełącznik użyti do miksera
-Jeśli pusty mikser będzei aktywny stale.</translation>
+        <translation>Przełącznik użyty do miksera
+Jeśli pusty - mikser będzie stale aktywny.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="418"/>
@@ -2395,14 +2395,14 @@ Jeśli pusty mikser będzei aktywny stale.</translation>
     <message>
         <location filename="mixerdialog.ui" line="460"/>
         <source>Fix Offset</source>
-        <translation>Ustal dopasowanie</translation>
+        <translation>Ustal przesunięcie</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="467"/>
         <source>Mixer warning.
 Setting this value will cause a beep to be emmitted when this value is active.</source>
         <translation>Ostrzeżenie miksera.
-Ustawinie tej wartośći spowoduje wyemitowanie dźwięku kiedy wartość zostanie uaktywniona.</translation>
+Ustawinie tej wartości spowoduje emitowanie dźwięku kiedy wartość będzie aktywna.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="472"/>
@@ -2524,7 +2524,7 @@ Ustala w jaki sposób miksery są łączone.
     <message>
         <location filename="mixerdialog.ui" line="32"/>
         <source>Delay</source>
-        <translation>Opóznienie</translation>
+        <translation>Opóźnienie</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="39"/>
@@ -2563,7 +2563,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Opóźnienie i spowolnienie&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; text-decoration: underline;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Te wartośći określają prędkość i opóźnienie.wyjscia z mikserów  &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Te wartośći określają prędkość i opóźnienie wyjścia mikserów  &lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Jeśli opóżnienie nie jest równe 0 aktywacja miksera zostanie opózniona o określoną ilość sekund.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
@@ -2712,7 +2712,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="1217"/>
         <source>Pulse Shift (polarity)</source>
-        <translation>Polaryzacja impulsu przesunięcia</translation>
+        <translation>Polaryzacja przesunięcia impulsu</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="76"/>
@@ -3159,7 +3159,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="3848"/>
         <source>Invert Aileron</source>
-        <translation>Odrwóc lotki</translation>
+        <translation>Odwróć lotki</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="3855"/>
@@ -3190,7 +3190,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="7974"/>
         <location filename="modeledit.ui" line="8842"/>
         <source>Fade Out</source>
-        <translation>Spowolnienie wyłącznia</translation>
+        <translation>Spowolnienie wyłączania</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4062"/>
