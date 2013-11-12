@@ -1328,7 +1328,7 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="173"/>
         <source>Display previous message again at startup ?</source>
-        <translation>Czy ponownie wyświetlić poprzednią informację na starcie?</translation>
+        <translation>Czy ponownie wyświetlić poprzednią informację przy uruchomieniu?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="350"/>
@@ -2752,7 +2752,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="236"/>
         <source>Switch startup  Warning</source>
-        <translation>Startowe ostrzeżenie o przełacznikach</translation>
+        <translation>Ostrzeżenie o przełacznikach przy uruchomieniu</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1065"/>
@@ -9631,7 +9631,7 @@ Moze być inny od języka firmware</translation>
     <message>
         <location filename="preferencesdialog.ui" line="70"/>
         <source>Check for updates on startup</source>
-        <translation>Sprawdź aktualizacje na przy starcie</translation>
+        <translation>Sprawdź aktualizacje na przy uruchomieniu</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="506"/>
