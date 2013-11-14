@@ -6,7 +6,7 @@
     <message>
         <location filename="expodialog.ui" line="50"/>
         <source>Weight</source>
-        <translation>Waga</translation>
+        <translation type="unfinished">Waga</translation>
     </message>
     <message>
         <location filename="expodialog.cpp" line="113"/>
@@ -17,7 +17,7 @@
         <location filename="expodialog.ui" line="303"/>
         <source>Switch used by the expo.
 If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
-        <translation>Przełącznik używany przez EXPO, jeśli puste EXPO będzie uznane za &quot;WŁĄCZONE&quot; przez cały czas.</translation>
+        <translation>Przełącznik używany przez EXPO, jeśli pole jest puste: EXPO będzie uznane za &quot;WŁĄCZONE&quot; przez cały czas.</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="69"/>
@@ -35,7 +35,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <location filename="expodialog.ui" line="100"/>
         <location filename="expodialog.ui" line="330"/>
         <source>GV</source>
-        <translation type="unfinished"></translation>
+        <translation>ZG</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="132"/>
@@ -155,7 +155,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <source>General settings used throught the transmitter.
 These will be relevant for all models in the same EEPROM.</source>
         <translation>Główne ustawienia radia.
-Będą one obowiązywać dla wszytskich modeli w tym samym EEPROM-ie.</translation>
+Będą one obowiązywać dla wszystkich modeli w tym samym EEPROM-ie.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="117"/>
@@ -269,7 +269,7 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="173"/>
         <source>MAVLink Baud Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Prędkość przesyłu MAVLink</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="392"/>
@@ -360,7 +360,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="1416"/>
         <source>If this value is not 0, any keypress will turn on the backlight and turn it off after the specified number of seconds.</source>
-        <translation>Jesli ta wartośći jest rózna od 0, każde nacisnienie klawisza włączy podswietlenie, które zgaśnie po ustalonej liczbie sekund.</translation>
+        <translation>Jeśli ta wartość jest różna od 0, każde naciśnięcie klawisza włączy podświetlenie, które zgaśnie po ustalonej liczbie sekund.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="564"/>
@@ -439,7 +439,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;To ustawienie definiuje ostrzeżenia startowe.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ostrzeżenie gazu - będzie ostrzegało gdy gaz nie jest na 0&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ostrzeżenie o przełacznikach - będzie ostrzegało gdy przełączniki nie są w pozycji bazowej&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ostrzeżenie o przełącznikach - będzie ostrzegało gdy przełączniki nie są w pozycji bazowej&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ostrzeżenie pamięci - będzie ostrzegało gdy pozostało juz niewiele wolnej pamięci&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ostrzeżenie cichej pracy - będzie ostrzegało gdy pikanie jest ustawione na cicho(0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -460,12 +460,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="214"/>
         <source>Switches Up</source>
-        <translation>Przełaczniki do góry</translation>
+        <translation>Przełączniki do góry</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="219"/>
         <source>Switches Down</source>
-        <translation>Przełaczniki do dołu</translation>
+        <translation>Przełączniki do dołu</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="461"/>
@@ -527,7 +527,7 @@ Acceptable values are 5v..10v</source>
         <translation>Ostrzeżenie o napięciu zasilania.
 Ustala próg ostrzeżenia.
 
-Dopuszczalne wartości 5-10</translation>
+Dopuszczalne wartości 5v-10v</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1633"/>
@@ -552,7 +552,7 @@ Dopuszczalne wartości 5-10</translation>
     <message>
         <location filename="generaledit.ui" line="721"/>
         <source>AIL</source>
-        <translation>Lot</translation>
+        <translation>Lotki</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="728"/>
@@ -597,7 +597,7 @@ Dopuszczalne wartości 5-10</translation>
     <message>
         <location filename="generaledit.ui" line="1719"/>
         <source>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</source>
-        <translation>Radio zasygnalizuje dzwiekiem brak aktywności po okresloniej liczbie minut. 0- wyłącza tę funkcję.</translation>
+        <translation>Radio zasygnalizuje dźwiękiem brak aktywności po określonej liczbie minut. 0- wyłącza tę funkcję.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1722"/>
@@ -615,7 +615,7 @@ Dopuszczalne wartości 5-10</translation>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Kalibracja zasilania:
-Ta wartość będzie dodana do zmierzonegej wartości napięcia zasilania.  Użyj tej wartości w celu kalibracji wyświetlanego napięcia aby było zgodne z napięciem wskazywanym przez miernik.</translation>
+Ta wartość będzie dodana do zmierzonej wartości napięcia zasilania.  Użyj tej wartości w celu kalibracji wyświetlanego napięcia aby było zgodne z napięciem wskazywanym przez miernik.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1478"/>
@@ -714,7 +714,7 @@ To ustawienie jest używane przez szablony, określa jakie wyjście przypisane j
     <message>
         <location filename="generaledit.ui" line="691"/>
         <source>Throttle Startup Warning</source>
-        <translation>Ostrzeżenie starowe gazu</translation>
+        <translation>Ostrzeżenie gazu przy uruchomieniu</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="996"/>
@@ -751,7 +751,7 @@ To ustawienie jest używane przez szablony, określa jakie wyjście przypisane j
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
-        <translation>To jest przełacznik do włączenia podswietlenia (jeśli zainstalowane).</translation>
+        <translation>To jest przełącznik do włączenia podświetlenia (jeśli zainstalowane).</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1700"/>
@@ -846,7 +846,7 @@ To ustawienie jest używane przez szablony, określa jakie wyjście przypisane j
     <message>
         <location filename="generaledit.ui" line="684"/>
         <source>FrSky Internal Alarm</source>
-        <translation>Wewnętrzy alarm FrSky</translation>
+        <translation>Wewnętrzny alarm FrSky</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1042"/>
@@ -896,7 +896,7 @@ To ustawienie jest używane przez szablony, określa jakie wyjście przypisane j
     <message>
         <location filename="generaledit.ui" line="806"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</source>
-        <translation>Jeśli uaktywnissz tryb FAI, utracisz informacje o wariometrze, funkcje odtwarzania i ekrany telemetrii. Ten tryb nie może być dezaktywowany.</translation>
+        <translation>Jeśli uaktywnisz tryb FAI, utracisz informacje o wariometrze, funkcje odtwarzania i ekrany telemetrii. Ten tryb nie może być dezaktywowany.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1690"/>
@@ -1038,7 +1038,7 @@ To ustawienie jest używane przez szablony, określa jakie wyjście przypisane j
         <location filename="generaledit.ui" line="2800"/>
         <location filename="generaledit.ui" line="2875"/>
         <source>----</source>
-        <translation></translation>
+        <translation>----</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="2805"/>
@@ -1066,7 +1066,7 @@ To ustawienie jest używane przez szablony, określa jakie wyjście przypisane j
     <message>
         <location filename="generaledit.ui" line="2900"/>
         <source>NO DATA Alarm</source>
-        <translation>Alarm Braku danych</translation>
+        <translation>Alarm braku danych</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="2934"/>
@@ -1172,7 +1172,7 @@ To ustawienie jest używane przez szablony, określa jakie wyjście przypisane j
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen.
 This function cannot be disabled by the radio.
 Are you sure ?</source>
-        <translation>Jeśli uaktywnissz tryb FAI, utracisz informacje o wariometrze,
+        <translation>Jeśli uaktywnisz tryb FAI, utracisz informacje o wariometrze,
 funkcje odtwarzania i ekrany telemetrii. Ten tryb nie może być dezaktywowany.
 Jesteś pewien ?</translation>
     </message>
@@ -1195,12 +1195,12 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="generaledit.cpp" line="1379"/>
         <source>Do you want to store calibration in %1 profile&lt;br&gt;overwriting existing calibration?</source>
-        <translation>Chcesz zapamietać dane kalibracji profilu %1&lt;br&gt; Zastąpią one aktualne dane kalibracji?</translation>
+        <translation>Chcesz zapamiętać dane kalibracji profilu %1&lt;br&gt; Zastąpią one aktualne dane kalibracji?</translation>
     </message>
     <message>
         <location filename="generaledit.cpp" line="1411"/>
         <source>Calibration and HW parameters saved.</source>
-        <translation>Kalibracja i parametry HW zapamietane.</translation>
+        <translation>Kalibracja i parametry HW zapamiętane.</translation>
     </message>
 </context>
 <context>
@@ -1219,12 +1219,12 @@ Jesteś pewien ?</translation>
         <location filename="mainwindow.cpp" line="669"/>
         <location filename="mainwindow.cpp" line="2161"/>
         <source>File loaded</source>
-        <translation>Plik załadowny</translation>
+        <translation>Plik załadowany</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="170"/>
         <source>Display previous warning again at startup ?</source>
-        <translation>Wyświetlić poprzednie ostrzeznie przy uruchomieniu?</translation>
+        <translation type="unfinished">Wyświetlić poprzednie ostrzeżenie przy uruchomieniu?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="224"/>
@@ -1267,7 +1267,7 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="281"/>
         <source>A new release of companion is available please check the repository</source>
-        <translation>Nowe wydanie companion9x jest dostepne, proszę sprawdzić repozytorium</translation>
+        <translation type="unfinished">Nowe wydanie companion9x jest dostępne, proszę sprawdzić repozytorium</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="285"/>
@@ -1323,7 +1323,7 @@ Jesteś pewien ?</translation>
         <location filename="mainwindow.cpp" line="721"/>
         <location filename="mainwindow.cpp" line="741"/>
         <source>companion9x - EEPROM Editor - firmware %1 - profile %2</source>
-        <translation>companion9x - EEPROM Editor - firmware %1 - profil %2</translation>
+        <translation type="unfinished">companion9x - Edytor EEPROM - firmware %1 - profil %2</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="173"/>
@@ -1333,7 +1333,7 @@ Jesteś pewien ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="350"/>
         <source>Firmware does not longer fit in flash, due to selected firmware options</source>
-        <translation>Firmware już nie mieści sie w pamięci flash ze względu na wybrane parametry</translation>
+        <translation type="unfinished">Firmware już nie mieści się w pamięci flash ze względu na wybrane parametry</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="353"/>
@@ -1389,21 +1389,21 @@ Pobrać teraz?
         <location filename="mainwindow.cpp" line="491"/>
         <location filename="mainwindow.cpp" line="520"/>
         <source>Release Notes</source>
-        <translation>Inforamcje o wydaniu</translation>
+        <translation type="unfinished">Informacje o wydaniu</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="499"/>
         <location filename="mainwindow.cpp" line="529"/>
         <source>Do you want to download release %1 now ?</source>
-        <translation>Chesz pobrać wydanie %1 teraz?</translation>
+        <translation type="unfinished">Chcesz pobrać wydanie %1 teraz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="516"/>
         <source>A new version of %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
-        <translation>Jest dostępna nowa wersja firmware %1
+        <translation type="unfinished">Jest dostępna nowa wersja firmware %1
 (aktualna %2 - nowsza %3)
-Chesz pobrać teraz?</translation>
+Chcesz pobrać teraz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="546"/>
@@ -1413,7 +1413,7 @@ Chesz pobrać teraz?</translation>
     <message>
         <location filename="mainwindow.cpp" line="556"/>
         <source>Release notes contain very important informations. Do you want to see them now ?</source>
-        <translation>Opis wydania zawiera bardzo ważne informacje. Chesz je przeczytać teraz?</translation>
+        <translation type="unfinished">Opis wydania zawiera bardzo ważne informacje. Chcesz je przeczytać teraz?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="623"/>
@@ -1440,7 +1440,7 @@ Chesz pobrać teraz?</translation>
         <location filename="mainwindow.cpp" line="902"/>
         <source>Cannot write file %1:
 %2.</source>
-        <translation>Nie mogę zapisać plku %1:
+        <translation>Nie mogę zapisać pliku %1:
 %2.</translation>
     </message>
     <message>
@@ -1459,7 +1459,7 @@ Chesz pobrać teraz?</translation>
         <location filename="mainwindow.cpp" line="1175"/>
         <location filename="mainwindow.cpp" line="1422"/>
         <source>Impossible to identify the radio on your system, please verify the eeprom disk is connected.</source>
-        <translation>Identyfikacja radia niemożliwa w Twoim systemie, prosze sprawdzić podłączony dysk eeprom.</translation>
+        <translation>Identyfikacja radia niemożliwa w Twoim systemie, proszę sprawdzić podłączony dysk eeprom.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1051"/>
@@ -1472,7 +1472,7 @@ Chesz pobrać teraz?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1079"/>
         <source>Write %1 to EEPROM memory?</source>
-        <translation>Zapsać %1 do pamięci EEPROM?</translation>
+        <translation>Zapisać %1 do pamięci EEPROM?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1082"/>
@@ -1481,14 +1481,14 @@ has not been recognized as a valid EEPROM
 Burn anyway ?</source>
         <translation>Plik %1
 nie został rozpoznany jako prawidłowy EEPROM
-Zapisać mimo wszytko?</translation>
+Zapisać mimo wszystko?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1089"/>
         <location filename="mainwindow.cpp" line="1344"/>
         <location filename="mainwindow.cpp" line="1391"/>
         <source>Backup is impossible</source>
-        <translation>Backup jest niemozliwy do wykonania</translation>
+        <translation type="unfinished">Backup jest niemożliwy do wykonania</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1089"/>
@@ -1537,7 +1537,7 @@ Zapisać mimo wszytko?</translation>
         <location filename="mainwindow.cpp" line="1363"/>
         <location filename="mainwindow.cpp" line="1406"/>
         <source>Write Flash To Tx</source>
-        <translation>Zapsać do pamięci FLASH radia</translation>
+        <translation type="unfinished">Zapisać do pamięci FLASH radia</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1369"/>
@@ -1607,7 +1607,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1494"/>
         <source>The companion9x project was originally forked from eePe</source>
-        <translation>Projekt companion9x odłaczony z oryginalnego eePe</translation>
+        <translation type="unfinished">Projekt companion9x odłączony z oryginalnego eePe</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1495"/>
@@ -1674,7 +1674,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1608"/>
         <source>Save the document to disk</source>
-        <translation>Zapisz dokumnet na dysku</translation>
+        <translation type="unfinished">Zapisz dokument na dysku</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1611"/>
@@ -1709,7 +1709,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1622"/>
         <source>Edit general preferences</source>
-        <translation>Edycja głownych ustawień</translation>
+        <translation type="unfinished">Edycja głównych ustawień</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1625"/>
@@ -1864,12 +1864,12 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1695"/>
         <source>Read EEPROM memory to file</source>
-        <translation>Zczytaj pamieć EEPROM do pliku</translation>
+        <translation type="unfinished">Zczytaj pamięć EEPROM do pliku</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1696"/>
         <source>Read EEPROM memory from transmitter to file</source>
-        <translation>Zczytaj pamieć EEPROM radia do pliku</translation>
+        <translation type="unfinished">Zczytaj pamięć EEPROM radia do pliku</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1699"/>
@@ -1904,17 +1904,17 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1712"/>
         <source>&amp;Fuses...</source>
-        <translation>Ustawienia &amp;mikrokontrolera...</translation>
+        <translation type="unfinished">Ustawienia &amp;mikro-kontrolera...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1713"/>
         <source>Show fuses dialog</source>
-        <translation>Pokaż okno ustawiń mikrokontrolera</translation>
+        <translation type="unfinished">Pokaż okno ustawień mikro-kontrolera</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1716"/>
         <source>&amp;Simulate</source>
-        <translation>&amp;Simulator</translation>
+        <translation type="unfinished">&amp;Symulator</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1717"/>
@@ -1959,7 +1959,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1734"/>
         <source>Close all the windows</source>
-        <translation>Zamknij wszytkie okna</translation>
+        <translation>Zamknij wszystkie okna</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1738"/>
@@ -1989,7 +1989,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1748"/>
         <source>Move the focus to the next window</source>
-        <translation>Uaktywnij nastepne okno</translation>
+        <translation type="unfinished">Uaktywnij następne okno</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1752"/>
@@ -2165,14 +2165,6 @@ Zapisać mimo wszytko?</translation>
         <translation>Zły plik EEPROM %1</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="312"/>
-        <location filename="mdichild.cpp" line="708"/>
-        <source>Error opening file %1:
-%2.</source>
-        <translation>Błąd odczytu pliku %1:
-%2.</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="321"/>
         <source>Invalid binary EEPROM File %1</source>
         <translation>Nieprawidłowy plik binarny EEPROM %1</translation>
@@ -2192,7 +2184,7 @@ Zapisać mimo wszytko?</translation>
         <location filename="mdichild.cpp" line="423"/>
         <source>Cannot write file %1:
 %2.</source>
-        <translation>Nie mogę zapisac pliku %1:
+        <translation type="unfinished">Nie mogę zapisać pliku %1:
 %2.</translation>
     </message>
     <message>
@@ -2235,12 +2227,12 @@ Zapisać?</translation>
     <message>
         <location filename="mdichild.cpp" line="516"/>
         <source>The backup dir set in preferences does not exist</source>
-        <translation>Ustawinia preferencji katalogu backupu nie istnieją</translation>
+        <translation type="unfinished">Ustawienia preferencji katalogu backupu nie istnieją</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="535"/>
         <source>Cannot write temporary file!</source>
-        <translation>Nie mogę zapisac pliku tymczasowego!</translation>
+        <translation type="unfinished">Nie mogę zapisać pliku tymczasowego!</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="549"/>
@@ -2277,7 +2269,7 @@ Zapisać?</translation>
     <message>
         <location filename="mdichild.cpp" line="583"/>
         <source>Firmware in radio is of a different family of eeprom written, check file and preferences!</source>
-        <translation>Firmware w radiu jest rózny od zapisanego eepromu, sprawdź plik i ustawienia!</translation>
+        <translation type="unfinished">Firmware w radiu jest różny od zapisanego eepromu, sprawdź plik i ustawienia!</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="586"/>
@@ -2401,8 +2393,8 @@ Jeśli pusty - mikser będzie stale aktywny.</translation>
         <location filename="mixerdialog.ui" line="467"/>
         <source>Mixer warning.
 Setting this value will cause a beep to be emmitted when this value is active.</source>
-        <translation>Ostrzeżenie miksera.
-Ustawinie tej wartości spowoduje emitowanie dźwięku kiedy wartość będzie aktywna.</translation>
+        <translation type="unfinished">Ostrzeżenie miksera.
+Ustawienie tej wartości spowoduje emitowanie dźwięku kiedy wartość będzie aktywna.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="472"/>
@@ -2438,13 +2430,13 @@ This determines how mixer values are added.
 &quot;+&quot; means the value of the current mix is added to the previous mixes in the same channel.
 &quot;*&quot; means the value of the current mix is amultiplied with the previous mixes in the same channel.
 &quot;R&quot; means the value replaces the previous values.  If the switch is off the value will be ignored.</source>
-        <translation>Multiplexer
+        <translation type="unfinished">Multiplexer
 
 Ustala w jaki sposób miksery są łączone.
 
-&quot;+&quot; oznacza dowanie wartości miksera do wczesniejszych mikserów na tym kanale.
-&quot;*&quot; oznacza mnożenie wartości miksera przez wczesniejsze miksery na tym kanale.
-&quot;R&quot; oznacza zastąpienie wartością miksera, wczesniejszych mikserów na tym kanale.</translation>
+&quot;+&quot; oznacza dowanie wartości miksera do wcześniejszych mikserów na tym kanale.
+&quot;*&quot; oznacza mnożenie wartości miksera przez wcześniejsze miksery na tym kanale.
+&quot;R&quot; oznacza zastąpienie wartością miksera, wcześniejszych mikserów na tym kanale.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="194"/>
@@ -2572,12 +2564,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mixerdialog.cpp" line="17"/>
         <source>DEST -&gt; X%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Cel -&gt; X%1</translation>
     </message>
     <message>
         <location filename="mixerdialog.cpp" line="19"/>
         <source>DEST -&gt; CH%1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Cel -&gt; %1 %2</translation>
     </message>
     <message>
         <location filename="mixerdialog.cpp" line="105"/>
@@ -2673,7 +2665,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="1380"/>
         <location filename="modeledit.ui" line="1735"/>
         <source>PPM delay</source>
-        <translation>Opóznienie PPM</translation>
+        <translation type="unfinished">Opóźnienie PPM</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="178"/>
@@ -2752,7 +2744,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="236"/>
         <source>Switch startup  Warning</source>
-        <translation>Ostrzeżenie o przełacznikach przy uruchomieniu</translation>
+        <translation>Ostrzeżenie o przełącznikach przy uruchomieniu</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1065"/>
@@ -3048,7 +3040,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="2135"/>
         <location filename="modeledit.ui" line="2229"/>
         <source>Count Down</source>
-        <translation>Odlicznie</translation>
+        <translation>Odliczanie</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2140"/>
@@ -3817,7 +3809,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="19115"/>
         <source>CS9</source>
-        <translation>CS9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19134"/>
@@ -3919,7 +3911,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.ui" line="19773"/>
         <location filename="modeledit.ui" line="20469"/>
         <source>Delay</source>
-        <translation>Opóznienie</translation>
+        <translation type="unfinished">Opóźnienie</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20499"/>
@@ -3962,7 +3954,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.ui" line="21184"/>
         <source>Volt source</source>
-        <translation>Żródło napięcia</translation>
+        <translation type="unfinished">Źródło napięcia</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21198"/>
@@ -4019,7 +4011,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.ui" line="21321"/>
         <source>CEL</source>
-        <translation>Ongniwo</translation>
+        <translation>Ogniwo</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21336"/>
@@ -4604,7 +4596,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="1627"/>
         <location filename="modeledit.cpp" line="1734"/>
         <source>CH%1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan %1%2</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1551"/>
@@ -4699,7 +4691,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="1711"/>
         <source> Warn(%1)</source>
-        <translation> Ostzeżenie(%1)</translation>
+        <translation type="unfinished"> Ostrzeżenie(%1)</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1805"/>
@@ -4707,12 +4699,12 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="2248"/>
         <location filename="modeledit.cpp" line="2255"/>
         <source>CH %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan %1</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="2749"/>
         <source>CF%1</source>
-        <translation type="unfinished"></translation>
+        <translation>FS %1</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3064"/>
@@ -4758,7 +4750,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="3629"/>
         <source>V-Tail</source>
-        <translation>Ustrzenie motylkowe(V-tail)</translation>
+        <translation type="unfinished">Usterzenie motylkowe(V-tail)</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3630"/>
@@ -4783,7 +4775,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="3635"/>
         <source>Heli Setup with gyro gain control (Futaba&apos;s channel assignment style)</source>
-        <translation>Ustawienie Heli z z uwzglednieniem odczytów Żyra(przydział kanałów w stylu Futaby)</translation>
+        <translation type="unfinished">Ustawienie Heli z z uwzględnieniem odczytów Żyra(przydział kanałów w stylu Futaby)</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3636"/>
@@ -4803,7 +4795,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="3639"/>
         <source>Use Model Config Wizard</source>
-        <translation>Użyj wpomagania ustawień modelu</translation>
+        <translation type="unfinished">Użyj wspomagania ustawień modelu</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="5335"/>
@@ -4933,17 +4925,17 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="6186"/>
         <source>Are you sure you want to delete curve %1 ?</source>
-        <translation>Jesteś pewien by wykasować krzwą %1 ?</translation>
+        <translation type="unfinished">Jesteś pewien by wykasować krzywą %1 ?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6304"/>
         <source>Apply Template?</source>
-        <translation>Załącz szablon?</translation>
+        <translation>Załączyć szablon?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6304"/>
         <source>Apply template &quot;%1&quot;?</source>
-        <translation>Załącza szablon &quot;%1&quot;?</translation>
+        <translation>Załączyć szablon &quot;%1&quot;?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6329"/>
@@ -4953,7 +4945,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="6329"/>
         <source>Really clear all the expos?</source>
-        <translation>Czy napewno wyczyścić wszystkie EXPO?</translation>
+        <translation type="unfinished">Czy na pewno wyczyścić wszystkie EXPO?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6340"/>
@@ -4965,7 +4957,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="6340"/>
         <source>Really clear all the mixes?</source>
-        <translation>Czy napewno wyczyścić wszystkie miksery?</translation>
+        <translation type="unfinished">Czy na pewno wyczyścić wszystkie miksery?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6351"/>
@@ -4975,7 +4967,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="6351"/>
         <source>Really clear all the curves?</source>
-        <translation>Czy napewno wyczyścić wszystkie krzywe?</translation>
+        <translation type="unfinished">Czy na pewno wyczyścić wszystkie krzywe?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6584"/>
@@ -5054,17 +5046,17 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="7092"/>
         <source>Really clear existing mixes on CH6?</source>
-        <translation>Czy napewno wyczyścić wszystkie miksery na kanale CH6?</translation>
+        <translation type="unfinished">Czy na pewno wyczyścić wszystkie miksery na kanale CH6?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="7204"/>
         <source>Really clear existing mixes on CH5?</source>
-        <translation>Czy napewno wyczyścić wszystkie miksery na kanale CH5?</translation>
+        <translation type="unfinished">Czy na pewno wyczyścić wszystkie miksery na kanale CH5?</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="7315"/>
         <source>Not enough free points in eeprom to store the curve.</source>
-        <translation>Za mało wolnych punktów w eepromie by zapamiętać krzwyą.</translation>
+        <translation type="unfinished">Za mało wolnych punktów w eepromie by zapamiętać krzywą.</translation>
     </message>
 </context>
 <context>
@@ -5082,7 +5074,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="89"/>
         <source>&amp;Model Wizard</source>
-        <translation>&amp;Kreator ustawiń modelu</translation>
+        <translation type="unfinished">&amp;Kreator ustawień modelu</translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="91"/>
@@ -5097,7 +5089,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modelslist.cpp" line="92"/>
         <source>&amp;Copy</source>
-        <translation>&amp;Kopuj</translation>
+        <translation type="unfinished">&amp;Kopiuj</translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="92"/>
@@ -5173,12 +5165,12 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modelslist.cpp" line="365"/>
         <location filename="modelslist.cpp" line="376"/>
         <source>Cannot delete default model.</source>
-        <translation>Nie mogę wykasowac bazowego modelu.</translation>
+        <translation type="unfinished">Nie mogę wykasować bazowego modelu.</translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="378"/>
         <source>Cannot cut default model.</source>
-        <translation>Nie mogę wyciąc bazowego modelu.</translation>
+        <translation type="unfinished">Nie mogę wyciąć bazowego modelu.</translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="448"/>
@@ -5345,12 +5337,12 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>A1</source>
-        <translation>Sygnał telemerii A1</translation>
+        <translation type="unfinished">Sygnał telemetrii A1</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>A2</source>
-        <translation>Sygnał telemerii A2</translation>
+        <translation type="unfinished">Sygnał telemetrii A2</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
@@ -5883,7 +5875,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1123"/>
         <location filename="open9xinterface.cpp" line="1125"/>
         <source>Support for receiving ardupilot data</source>
-        <translation>Wstaprcie dla otrzymywania danych ardupilota</translation>
+        <translation type="unfinished">Wsparcie dla otrzymywania danych ardupilota</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1123"/>
@@ -5909,7 +5901,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="open9xinterface.cpp" line="1126"/>
         <source>FAI MODE always enabled</source>
-        <translation>Tryb FAI zawsze aktywny.Jeśli uaktywnissz tryb FAI, utracisz informacje o wariometrze, funkcje odtwarzania i ekrany telemetrii. Ten tryb nie może być dezaktywowany</translation>
+        <translation type="unfinished">Tryb FAI zawsze aktywny. Jeśli uaktywnisz tryb FAI, utracisz informacje o wariometrze, funkcje odtwarzania i ekrany telemetrii. Ten tryb nie może być dezaktywowany</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1128"/>
@@ -5923,7 +5915,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1232"/>
         <location filename="open9xinterface.cpp" line="1262"/>
         <source>Enable heli menu and cyclic mix support</source>
-        <translation>Uaktywnione menu Heli i wsparcie dla cycklicznych mikserów</translation>
+        <translation type="unfinished">Uaktywnione menu Heli i wsparcie dla cyklicznych mikserów</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1131"/>
@@ -5961,7 +5953,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1276"/>
         <location filename="open9xinterface.cpp" line="1301"/>
         <source>In model setup menus automatically set source by moving some of them</source>
-        <translation>W menu ustawień modelu automatycznie wybierz źródło poprzez porusznie nim</translation>
+        <translation type="unfinished">W menu ustawień modelu automatycznie wybierz źródło poprzez poruszenie nim</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1152"/>
@@ -5990,7 +5982,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1157"/>
         <location filename="open9xinterface.cpp" line="1223"/>
         <source>No vario support</source>
-        <translation>Bez wsparcia vario</translation>
+        <translation type="unfinished">Bez wsparcia wario</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1158"/>
@@ -6017,13 +6009,13 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="open9xinterface.cpp" line="1308"/>
         <source>Use FrSky Taranis sticks in a 9X/9XR</source>
-        <translation>Uzyj drązków Taranisa w 9X/9XR</translation>
+        <translation type="unfinished">Użyj drążków Taranisa w 9X/9XR</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1316"/>
         <location filename="open9xinterface.cpp" line="1328"/>
         <source>Disable HELI menu and cyclic mix support</source>
-        <translation>Dezaktywowane menu Heli i wsparcie dla cycklicznych mikserów</translation>
+        <translation type="unfinished">Dezaktywowane menu Heli i wsparcie dla cyklicznych mikserów</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1317"/>
@@ -6067,7 +6059,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1238"/>
         <location filename="open9xinterface.cpp" line="1267"/>
         <source>Used if you have modified your radio with voice mode</source>
-        <translation>Używane jeśli radio jest zmodyfikowane w calu uzycia komunikatów głosowych</translation>
+        <translation type="unfinished">Używane jeśli radio jest zmodyfikowane w calu użycia komunikatów głosowych</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1137"/>
@@ -6093,7 +6085,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1219"/>
         <location filename="open9xinterface.cpp" line="1253"/>
         <source>Enable the throttle trace in Statistics</source>
-        <translation>Uaktywnić sledzenie przepustnicy w statystykach</translation>
+        <translation type="unfinished">Uaktywnić śledzenie przepustnicy w statystykach</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1164"/>
@@ -6108,7 +6100,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="open9xinterface.cpp" line="1268"/>
         <source>Support of FrSky PXX protocol</source>
-        <translation>Wzparcie dla protokołu Frsky PXX</translation>
+        <translation type="unfinished">Wsparcie dla protokołu Frsky PXX</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1290"/>
@@ -6133,8 +6125,8 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="320"/>
         <source>Your radio probably uses a wrong firmware,
  eeprom size is 4096 but only the first 2048 are used</source>
-        <translation>Twoje radio prawdopodobnie uzywa złego firmware,
-        wielkość eepromu jest 4096 ale tylko piersze 2048 jest używane </translation>
+        <translation type="unfinished">Twoje radio prawdopodobnie używa złego firmware,
+        wielkość eepromu jest 4096 ale tylko pierwsze 2048 jest używane </translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1140"/>
@@ -6175,13 +6167,13 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1275"/>
         <location filename="open9xinterface.cpp" line="1300"/>
         <source>Pots use in menus navigation</source>
-        <translation>Uzycie potencjometrów do nawigadji w menu</translation>
+        <translation type="unfinished">Użycie potencjometrów do nawigacji w menu</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1145"/>
         <location filename="open9xinterface.cpp" line="1181"/>
         <source>SmartieParts 2.2 Backlight support</source>
-        <translation>Wsparcie podswietlenia SmartieParts 2.2</translation>
+        <translation type="unfinished">Wsparcie podświetlenia SmartieParts 2.2</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1147"/>
@@ -6199,7 +6191,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1278"/>
         <location filename="open9xinterface.cpp" line="1303"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
-        <translation>Szybkie nastawianie wartośći
+        <translation type="unfinished">Szybkie nastawianie wartości
 (+) a (-) neguje wartość
 (+)a (UP) ustawia max
 (-) a (DN) ustawia min
@@ -6240,7 +6232,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xinterface.cpp" line="1255"/>
         <location filename="open9xinterface.cpp" line="1284"/>
         <source>Imperial units</source>
-        <translation>Imerialne jednostki w telemetrii</translation>
+        <translation type="unfinished">Imperialne jednostki w telemetrii</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1309"/>
@@ -6290,7 +6282,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="er9xeeprom.cpp" line="320"/>
         <source>er9x doesn&apos;t have negative gvars as weight</source>
-        <translation>er9x nie posiada ujemnych zmiennych globalych jako wagi</translation>
+        <translation type="unfinished">er9x nie posiada ujemnych zmiennych globalnych jako wagi</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="336"/>
@@ -6314,7 +6306,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="er9xeeprom.cpp" line="526"/>
         <source>er9x does not support Custom Switch function %1</source>
-        <translation>er9x nie posiada funcji przełączników wirtualnych%1</translation>
+        <translation type="unfinished">er9x nie posiada funkcji przełączników wirtualnych%1</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="597"/>
@@ -6365,7 +6357,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="ersky9xeeprom.cpp" line="657"/>
         <location filename="ersky9xeeprom.cpp" line="707"/>
         <source>ersky9x does not support Custom Switch function %1</source>
-        <translation>ersky9x nie wspiera funkcji wirtualnego przełacznika %1</translation>
+        <translation type="unfinished">ersky9x nie wspiera funkcji wirtualnego przełącznika %1</translation>
     </message>
     <message>
         <location filename="ersky9xeeprom.cpp" line="942"/>
@@ -6429,7 +6421,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="gruvin9xeeprom.cpp" line="395"/>
         <source>gruvin9x doesn&apos;t have trims as source</source>
-        <translation>gruvin9x nie posiada trymerów jako żródła</translation>
+        <translation type="unfinished">gruvin9x nie posiada trymerów jako źródła</translation>
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="406"/>
@@ -6489,7 +6481,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="38"/>
         <source>German</source>
-        <translation>NIemiecki</translation>
+        <translation type="unfinished">Niemiecki</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="38"/>
@@ -6580,7 +6572,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="129"/>
         <source>Trainer THR</source>
-        <translation>Trener - plyn</translation>
+        <translation type="unfinished">Trener - Gaz</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="131"/>
@@ -6600,7 +6592,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="137"/>
         <source>Play Haptic</source>
-        <translation>Wybruj</translation>
+        <translation type="unfinished">Wibruj</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="139"/>
@@ -6723,7 +6715,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="1327"/>
         <source>Exponential</source>
-        <translation>Exponencjalny</translation>
+        <translation type="unfinished">Eksponencjalny</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1333"/>
@@ -6758,7 +6750,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="1360"/>
         <source>Throttle</source>
-        <translation>Plyn</translation>
+        <translation type="unfinished">Gaz</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1361"/>
@@ -7029,14 +7021,14 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="open9xeeprom.cpp" line="860"/>
         <source>openTx only accepts %1 points in all curves</source>
-        <translation>openTx dopuszcza tylko %1 punktów dla wszytkuch krzywych</translation>
+        <translation>openTx dopuszcza tylko %1 punktów dla wszystkich krzywych</translation>
     </message>
     <message>
         <location filename="open9xeeprom.cpp" line="1199"/>
         <location filename="open9xeeprom.cpp" line="1217"/>
         <location filename="open9xeeprom.cpp" line="1220"/>
         <source>OpenTX on this board doesn&apos;t accept this function</source>
-        <translation>OpenTX na tej pltformie nie dopuszcza tej funkcji</translation>
+        <translation type="unfinished">OpenTX na tej platformie nie dopuszcza tej funkcji</translation>
     </message>
     <message>
         <location filename="open9xeeprom.cpp" line="1687"/>
@@ -7079,7 +7071,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="open9xStockeeprom.cpp" line="3163"/>
         <location filename="open9xStockeeprom.cpp" line="3364"/>
         <source>open9x only accepts %1 points in all curves</source>
-        <translation>Open9x  dopuszcza tylko %1 punktów dla wszytkich krzywych</translation>
+        <translation>Open9x  dopuszcza tylko %1 punktów dla wszystkich krzywych</translation>
     </message>
     <message>
         <location filename="open9xStockeeprom.cpp" line="178"/>
@@ -7158,7 +7150,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
 We are really sensible to that!
 
 The openTX/C9X Team.</source>
-        <translation>Dziękujemy za wszytkie datki, miłe wiadomości, ciekawe pomysły, konstruktywne propozycje. etc. dla następnych openTX/C9x modeli
+        <translation>Dziękujemy za wszystkie datki, miłe wiadomości, ciekawe pomysły, konstruktywne propozycje. etc. dla następnych openTX/C9x modeli
 
 Bardzo nam na tym zależy i są to bardzo wazne dla nas elementy
 
@@ -7218,7 +7210,7 @@ Zespół openTX/C9x.</translation>
     <message>
         <location filename="avroutputdialog.cpp" line="303"/>
         <source>ie: OpenTX for M128 / 9X board or OpenTX for 9XR board with M128 chip</source>
-        <translation>ie: OpenTX dla plaftormy M128 / 9X lub OpenTX dla platformy 9XR z chipem M128</translation>
+        <translation type="unfinished">ie: OpenTX dla platformy M128 / 9X lub OpenTX dla platformy 9XR z chipem M128</translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="311"/>
@@ -7230,18 +7222,18 @@ Zespół openTX/C9x.</translation>
         <source>Your radio uses a %1 CPU!!!
 
 Please check advanced burn options to set the correct cpu type.</source>
-        <translation>Twoje radio uzywa procesora %1!!!
+        <translation type="unfinished">Twoje radio używa procesora %1!!!
 
-Spradź zaawansowane funkcjie wypiekania by ustaić prawidłowy procesor.</translation>
+Sprawdź zaawansowane funkcje wypiekania by ustalić prawidłowy procesor.</translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="321"/>
         <source>Your radio uses a %1 CPU!!!
 
 Please select an appropriate firmware type to program it.</source>
-        <translation>Twoje radio uzywa procesora %1!!!
+        <translation type="unfinished">Twoje radio używa procesora %1!!!
 
-Proszę wybrac poprany rodzaj firmware.</translation>
+Proszę wybrać poprany rodzaj firmware.</translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="321"/>
@@ -7280,7 +7272,7 @@ Aktualnie używasz:
         <location filename="avroutputdialog.cpp" line="390"/>
         <source>done with errors</source>
         <oldsource> done with errors</oldsource>
-        <translation>Zakończonoe z Błędami</translation>
+        <translation type="unfinished">Zakończone z Błędami</translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="392"/>
@@ -7363,14 +7355,14 @@ Potrzebujesz pomocy ?</translation>
         <location filename="burnconfigdialog.ui" line="703"/>
         <location filename="burnconfigdialog.ui" line="713"/>
         <source>Use this button to browse and look for the AVRDUDE executable file.</source>
-        <translation>Uzuj tego przycisku w celu znalezienia pliku wykonywalengo AVRDUDE.</translation>
+        <translation type="unfinished">Użyj tego przycisku w celu znalezienia pliku wykonywalnego AVRDUDE.</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="87"/>
         <location filename="burnconfigdialog.ui" line="706"/>
         <location filename="burnconfigdialog.ui" line="716"/>
         <source>Browse...</source>
-        <translation>Przegladaj ...</translation>
+        <translation type="unfinished">Przeglądaj ...</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="94"/>
@@ -7381,17 +7373,17 @@ Potrzebujesz pomocy ?</translation>
         <location filename="burnconfigdialog.ui" line="104"/>
         <source>Programmer used for communicating with the controller.
 Please consult the programmer&apos;s documentation and the AVRDUDE documentation to select the appropriate programmer.</source>
-        <translation>Progtamator użyty do komunikaji z mikrokontrolerem.</translation>
+        <translation type="unfinished">Programator użyty do komunikacji z mikrokontrolerem.</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="425"/>
         <source>List all available programmers.</source>
-        <translation>Lista wszytkich dostępnych programów.</translation>
+        <translation>Lista wszystkich dostępnych programów.</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="428"/>
         <source>List Available</source>
-        <translation>Lista szystkich</translation>
+        <translation type="unfinished">Lista dostępnych</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="435"/>
@@ -7406,11 +7398,11 @@ Please consult the programmer&apos;s documentation and the AVRDUDE documentation
 This can be used for providing extra information to AVRDUDE.
 
 Please only use this if you know what you are doing.  There are no error checks and you could cripple your controller.</source>
-        <translation>Dodatkowe argumenty AVRDUDE.
+        <translation type="unfinished">Dodatkowe argumenty AVRDUDE.
 Mogą być użyte do przekazania dodatowych informacji do AVRDUDE.
 
-Uzyj tylko jeśli dokłądnie wiesz co robisz !!
-Nie ma to spradzania błedów i mozesz uszkodzić mikrokontroler.
+Użyj tylko jeśli dokłądnie wiesz co robisz !!
+Nie ma to spradzania błędów i mozesz uszkodzić mikrokontroler.
 </translation>
     </message>
     <message>
@@ -7430,10 +7422,8 @@ Nie ma to spradzania błedów i mozesz uszkodzić mikrokontroler.
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="471"/>
-        <source>Port komunikacyjny programatora.
-</source>
-        <translation>Komunikační port programátoru.
-</translation>
+        <source>Communication port to the programmer</source>
+        <translation type="unfinished">Port komunikacyjny programatora</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="544"/>
@@ -7449,7 +7439,7 @@ Nie ma to spradzania błedów i mozesz uszkodzić mikrokontroler.
     <message>
         <location filename="burnconfigdialog.ui" line="730"/>
         <source>Use advanced controls</source>
-        <translation>Użyj zawansowanych ustawień</translation>
+        <translation type="unfinished">Użyj zaawansowanych ustawień</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="574"/>
@@ -7463,7 +7453,7 @@ Nie ma to spradzania błedów i mozesz uszkodzić mikrokontroler.
         <source>CPU present on your 9x radio
 Should be m64 for stock radios
 m2560 for v4.1 boards</source>
-        <translation>CPU ozainstalowny w twoin radiu 9x :
+        <translation type="unfinished">CPU zainstalowany w twoim radiu 9x :
 m64 dla zwykłego radia
 m2560 dla platformy V4</translation>
     </message>
@@ -7529,12 +7519,12 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burnconfigdialog.cpp" line="329"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses of  %1 to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
-        <translation>&lt;b&gt;&lt;u&gt;UWAGA!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;U zresetuje bezpieczniki %1 do fabrycznych ustawiń.&lt;br&gt;Zapis bezpieczników moze uszkodzić twoje radio.&lt;br&gt;Zrób to tylko jesli jestes pewien ze są złe!&lt;br&gt;Jesteś pewien by kontynuować?</translation>
+        <translation type="unfinished">&lt;b&gt;&lt;u&gt;UWAGA!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;U zresetuje bezpieczniki %1 do fabrycznych ustawień.&lt;br&gt;Zapis bezpieczników może uszkodzić twoje radio.&lt;br&gt;Zrób to tylko jeśli jesteś pewien że są złe!&lt;br&gt;Jesteś pewien by kontynuować?</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.cpp" line="398"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normally CPU type is automatically selected according to the chosen firmware.&lt;br&gt;If you change the CPU type the resulting eeprom could be inconsistent.</source>
-        <translation>&lt;b&gt;&lt;u&gt;Ostrzeżenie!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normalnie typ procesora jest wybierany automatycznie zgodnie w zybranym firmware.&lt;br&gt;Jesli zmienisz typ procesora dla EEpromu rezultaty mogą być nieprzewidywalne.</translation>
+        <translation type="unfinished">&lt;b&gt;&lt;u&gt;Ostrzeżenie!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normalnie typ procesora jest wybierany automatycznie zgodnie z wybranym firmware.&lt;br&gt;Jeśli zmienisz typ procesora dla EEpromu rezultaty mogą być nieprzewidywalne.</translation>
     </message>
 </context>
 <context>
@@ -7542,27 +7532,27 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burndialog.ui" line="26"/>
         <source>Customize Splash</source>
-        <translation>Włąsne logo</translation>
+        <translation type="unfinished">Własne logo</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="123"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modify calibration parameters using settings from current profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zmiana paramatrów kalibracji przy użyciu aktualnego profilu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zmiana parametrów kalibracji przy użyciu aktualnego profilu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="126"/>
         <source>Patch calibration setting from profile</source>
-        <translation>Zamień ustawienai kalibracji wartośćmi z profilu</translation>
+        <translation type="unfinished">Zamień ustawienia kalibracji wartościami z profilu</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="133"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modify HW parameters using settings from current profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zmień ustawiania parameterów HW przy pomocy wartości z aktualnego profilu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zmień ustawiania parametrów HW przy pomocy wartości z aktualnego profilu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="136"/>
         <source>Patch HW setting from profile</source>
-        <translation>Zmień ustawiania parameterów HW wartościami z profilu</translation>
+        <translation type="unfinished">Zmień ustawiania parametrów HW wartościami z profilu</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="199"/>
@@ -7626,7 +7616,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burndialog.ui" line="279"/>
         <source>Check Firmware compatibility</source>
-        <translation>Sprawdź kompatibilność firmware</translation>
+        <translation type="unfinished">Sprawdź kompatybilność firmware</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="289"/>
@@ -7702,7 +7692,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burndialog.cpp" line="244"/>
         <source>Burn anyway !</source>
-        <translation>Wypiecz mimo wszytko !</translation>
+        <translation>Wypiecz mimo wszystko !</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="258"/>
@@ -7743,7 +7733,7 @@ m2560 dla platformy V4</translation>
         <location filename="burndialog.cpp" line="324"/>
         <source>Error reading file %1:
 %2.</source>
-        <translation>Błądz odczytu pliku %1:
+        <translation type="unfinished">Błąd odczytu pliku %1:
 %2.</translation>
     </message>
     <message>
@@ -7780,19 +7770,19 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burndialog.cpp" line="517"/>
         <source>Wrong radio calibration data in profile, eeprom not patched</source>
-        <translation>Błedna kalibracja radia w profilu, nie zmieniono EEPROMu</translation>
+        <translation type="unfinished">Błędna kalibracja radia w profilu, nie zmieniono EEPROMu</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="571"/>
         <source>Wrong radio setting data in profile, eeprom not patched</source>
-        <translation>Błedne ustawienia parametrów HW w profilu, nie zmieniono EEPROMu</translation>
+        <translation type="unfinished">Błędne ustawienia parametrów HW w profilu, nie zmieniono EEPROMu</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="585"/>
         <location filename="burndialog.cpp" line="590"/>
         <source>Cannot write file %1:
 %2.</source>
-        <translation>Nie moge zapisać pliku %1:
+        <translation type="unfinished">Nie mogę zapisać pliku %1:
 %2.</translation>
     </message>
     <message>
@@ -7838,7 +7828,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="comparedialog.cpp" line="246"/>
         <source>General Model Settings</source>
-        <translation>Głowne ustawienia modelu</translation>
+        <translation type="unfinished">Główne ustawienia modelu</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="249"/>
@@ -7869,7 +7859,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="257"/>
         <location filename="comparedialog.cpp" line="280"/>
         <source>Protocol</source>
-        <translation>Protokól</translation>
+        <translation type="unfinished">Protokół</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="259"/>
@@ -7881,7 +7871,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="261"/>
         <location filename="comparedialog.cpp" line="284"/>
         <source>Throttle Trim</source>
-        <translation>Trimer przepustnicy</translation>
+        <translation type="unfinished">Trymer przepustnicy</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="261"/>
@@ -7980,7 +7970,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="352"/>
         <location filename="comparedialog.cpp" line="441"/>
         <source>Gvars</source>
-        <translation>Gzmienna</translation>
+        <translation type="unfinished">G-zmienna</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="355"/>
@@ -8065,7 +8055,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="comparedialog.cpp" line="615"/>
         <source>Expo/Dr Settings</source>
-        <translation>Expo/Ustawinia DR</translation>
+        <translation type="unfinished">Expo/Ustawienia DR</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="651"/>
@@ -8170,7 +8160,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="comparedialog.cpp" line="1052"/>
         <source>Custom Switches</source>
-        <translation>Wirtualne rzełączniki</translation>
+        <translation type="unfinished">Wirtualne przełączniki</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1062"/>
@@ -8180,7 +8170,7 @@ m2560 dla platformy V4</translation>
     </message>
     <message>
         <source>Function Switches</source>
-        <translation>Funkcje przełaczników</translation>
+        <translation type="unfinished">Funkcje przełączników</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1086"/>
@@ -8203,7 +8193,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="comparedialog.cpp" line="1210"/>
         <source>Telemetry Settings</source>
-        <translation>Ustawinia telemetrii</translation>
+        <translation type="unfinished">Ustawienia telemetrii</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1215"/>
@@ -8319,7 +8309,7 @@ m2560 dla platformy V4</translation>
         <location filename="comparedialog.cpp" line="1307"/>
         <location filename="comparedialog.cpp" line="1425"/>
         <source>Telemetry Bars</source>
-        <translation>Wskaźniki elemetryczne</translation>
+        <translation type="unfinished">Wskaźniki telemetryczne</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1308"/>
@@ -8377,19 +8367,19 @@ m2560 dla platformy V4</translation>
         <source>Honors go to Rafal Tomczak (RadioClone) and Thomas Husterer (th9x) 
 of course. Also to Erez Raviv (er9x) and it&apos;s fantastic eePe, from which
 companion9x was forked out.</source>
-        <translation>Specjalne podziękowania Rafalowi Tomczakowi (RadioClone),
+        <translation type="unfinished">Specjalne podziękowania Rafałowi Tomczakowi (RadioClone),
 Thomasowi Husteterowi (th9x) a także Erazowi Ravivowi(er9x) i jego fantastycznemu eePe,
 z którego wyrósł companion9x.</translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="31"/>
         <source>Thank you all !!!</source>
-        <translation>Wszytkim wam dziekujemy !!!</translation>
+        <translation type="unfinished">Wszystkim wam dziękujemy !!!</translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="34"/>
         <source>Contributors</source>
-        <translation>Wspólpracownicy</translation>
+        <translation type="unfinished">Współpracownicy</translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="45"/>
@@ -8469,7 +8459,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="customizesplashdialog.cpp" line="50"/>
         <source>Select an image to customize your splash &lt;br /&gt;or save actual firmware splash</source>
-        <translation>Wybierz pobrazek do spersonalizowania twojego ekranu &lt;br /&gt;lub wgraj aktualny obrazek do firmware</translation>
+        <translation type="unfinished">Wybierz obrazek do spersonalizowania twojego ekranu &lt;br /&gt;lub wgraj aktualny obrazek do firmware</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="57"/>
@@ -8482,7 +8472,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="customizesplashdialog.cpp" line="57"/>
         <source>Could not find bitmap to replace in file</source>
-        <translation>Nie mogę znaleźc bitmapy w celu zastąpienia pliku</translation>
+        <translation type="unfinished">Nie mogę znaleźć bitmapy w celu zastąpienia pliku</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="71"/>
@@ -8614,12 +8604,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;When in doubt consult either the project&apos;s page or the 9xforum (http://9xforums.com/forum/)&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;If you do get locked out - google lookup for &amp;quot;dealing with Fuse Bricks&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;Reset bezpieczników&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Bezpiecznieki w AVR opisz zachowanie. Naciśnięcie tego przycisku ustawia bezpieczniki do domyślnych parametrów potrzebnych w FW. Parametry te są różne dla zwykłej oraz 4,1 płyty głownej, sprawdź, czy wybrano odpowiedni typ procesora w preferencjach.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Bezpieczniki w AVR opisz zachowanie. Naciśnięcie tego przycisku ustawia bezpieczniki do domyślnych parametrów potrzebnych w FW. Parametry te są różne dla zwykłej oraz 4,1 płyty głównej, sprawdź, czy wybrano odpowiedni typ procesora w preferencjach.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Ten przycisk róznież ustawia &amp;quot;Bezpiecznik ochrony EEPROM&amp;quot; Fuse.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;To ochrania  EEPROM przed wymazaniem gdy flaszujesz radio.&lt;/span&gt;&lt;/p&gt;
@@ -8627,8 +8617,8 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;UWAGA!!&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Ustawianie bezpieczników moze prowadzić do problemów łacznie z całkowitym zablokowaniem twojego radia.  Rób to tylko wtedy gdy masz absolutną pewność i wiedzę.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Gdy masz wątpliwośći skonsultuj się ze stroną projektu lub na 9xforum (http://9xforums.com/forum/)&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Jeśli urządzeni zeostanie zablokowane przeszukaj google w celu znalezienia &amp;quot;Jak naprawić Fuse BRICK &amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Gdy masz wątpliwości skonsultuj się ze stroną projektu lub na 9xforum (http://9xforums.com/forum/)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Jeśli urządzeni zostanie zablokowane przeszukaj google w celu znalezienia &amp;quot;Jak naprawić Fuse BRICK &amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="fusesdialog.ui" line="63"/>
@@ -8654,12 +8644,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;When in doubt consult either the project&apos;s page or the 9xforum (http://9xforums.com/forum/)&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;If you do get locked out - google lookup for &amp;quot;dealing with Fuse Bricks&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;Reset bezpieczników&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Bezpiecznieki w AVR opisz zachowanie. Naciśnięcie tego przycisku ustawia bezpieczniki do domyślnych parametrów potrzebnych w FW. Parametry te są różne dla zwykłej oraz 4,1 płyty głownej, sprawdź, czy wybrano odpowiedni typ procesora w preferencjach.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Bezpiecznieki w AVR opisz zachowanie. Naciśnięcie tego przycisku ustawia bezpieczniki do domyślnych parametrów potrzebnych w FW. Parametry te są różne dla zwykłej oraz 4,1 płyty głównej, sprawdź, czy wybrano odpowiedni typ procesora w preferencjach.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Ten przycisk róznież ustawia &amp;quot;Bezpiecznik ochrony EEPROM&amp;quot; Fuse.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;To ochrania  EEPROM przed wymazaniem gdy flaszujesz radio.&lt;/span&gt;&lt;/p&gt;
@@ -8667,8 +8657,8 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;UWAGA!!&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Ustawianie bezpieczników moze prowadzić do problemów łacznie z całkowitym zablokowaniem twojego radia.  Rób to tylko wtedy gdy masz absolutną pewność i wiedzę.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Gdy masz wątpliwośći skonsultuj się ze stroną projektu lub na 9xforum (http://9xforums.com/forum/)&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Jeśli urządzeni zeostanie zablokowane przeszukaj google w celu znalezienia &amp;quot;Jak naprawić Fuse BRICK &amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Gdy masz wątpliwości skonsultuj się ze stroną projektu lub na 9xforum (http://9xforums.com/forum/)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;Jeśli urządzeni zostanie zablokowane przeszukaj google w celu znalezienia &amp;quot;Jak naprawić Fuse BRICK &amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="fusesdialog.ui" line="88"/>
@@ -8755,7 +8745,7 @@ p, li { white-space: pre-wrap; }
         <location filename="joystickdialog.ui" line="594"/>
         <location filename="joystickdialog.ui" line="681"/>
         <source>Left Vertical</source>
-        <translation>Levy pionowy</translation>
+        <translation type="unfinished">Lewy pionowy</translation>
     </message>
     <message>
         <location filename="joystickdialog.ui" line="102"/>
@@ -8767,7 +8757,7 @@ p, li { white-space: pre-wrap; }
         <location filename="joystickdialog.ui" line="599"/>
         <location filename="joystickdialog.ui" line="686"/>
         <source>Left Horizontal</source>
-        <translation>Levy poziomy</translation>
+        <translation type="unfinished">Lewy poziomy</translation>
     </message>
     <message>
         <location filename="joystickdialog.ui" line="107"/>
@@ -8901,7 +8891,7 @@ Naciśnij Dalej po skończeniu</translation>
         <location filename="joystickdialog.cpp" line="93"/>
         <source>Map joystick channels to controls using comboboxes.
 Press next when done</source>
-        <translation>Zmapuj kanały joysticka uzywają comboboxów.
+        <translation type="unfinished">Zmapuj kanały joysticka używają comboboxów.
 Naciśnij Dalej po skończeniu</translation>
     </message>
     <message>
@@ -8984,7 +8974,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="logsdialog.cpp" line="501"/>
         <source>The selected logfile contains %1 invalid lines out of  %2 total lines</source>
-        <translation>Wybrany plik zawiera %1 błednych linii z %2 wszytkich linii</translation>
+        <translation type="unfinished">Wybrany plik zawiera %1 błędnych linii z %2 wszystkich linii</translation>
     </message>
 </context>
 <context>
@@ -9237,7 +9227,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="modelconfigdialog.ui" line="722"/>
         <source>Use advanced controls</source>
-        <translation>Uzyj zaawansowanych ustawień</translation>
+        <translation type="unfinished">Użyj zaawansowanych ustawień</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="729"/>
@@ -9447,7 +9437,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="preferencesdialog.ui" line="92"/>
         <source>Ask use of wizard for new models</source>
-        <translation>Zapytać czy uzywać konfiguratora nowych modeli</translation>
+        <translation type="unfinished">Zapytać czy używać konfiguratora nowych modeli</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="141"/>
@@ -9835,7 +9825,7 @@ Mode 4:
     </message>
     <message>
         <source>Used if you have modified your radio with haptic mode</source>
-        <translation>Używane jeśli radio jest zmodyfikowane w calu uzycia komunikatów głosowych</translation>
+        <translation type="unfinished">Używane jeśli radio jest zmodyfikowane w celu korzystania z komunikatów głosowych</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="532"/>
@@ -9849,7 +9839,7 @@ Mode 4:
     </message>
     <message>
         <source>Enable resetting values by pressing up and down at the same time</source>
-        <translation>Szybkie nastawianie wartośći
+        <translation>Szybkie nastawianie wartości
         (+) a (-) neguje wartość
         (+)a (UP) ustawia max
         (-) a (DN) ustawia min
@@ -9942,7 +9932,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="130"/>
         <source>General Model Settings</source>
-        <translation>Głowne ustawienia modelu</translation>
+        <translation type="unfinished">Główne ustawienia modelu</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="132"/>
@@ -10043,7 +10033,7 @@ Mode 4:
         <location filename="printdialog.cpp" line="821"/>
         <location filename="printdialog.cpp" line="848"/>
         <source>Switch</source>
-        <translation>Przełacznik</translation>
+        <translation type="unfinished">Przełącznik</translation>
     </message>
     <message>
         <source>Phase name</source>
@@ -10227,7 +10217,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="761"/>
         <source>Custom Switches</source>
-        <translation>Witrualne przełaczniki</translation>
+        <translation type="unfinished">Witrualne przełączniki</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="768"/>
@@ -10262,7 +10252,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="845"/>
         <source>Function Switches</source>
-        <translation>Funkcja przełaczników</translation>
+        <translation type="unfinished">Funkcja przełączników</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="849"/>
