@@ -3413,7 +3413,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="2167"/>
         <location filename="modeledit.ui" line="2261"/>
         <source>Persistent</source>
-        <translation>Dokładny</translation>
+        <translation>Trwały</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2181"/>
@@ -5011,7 +5011,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
         <location filename="modeledit.cpp" line="6687"/>
         <location filename="modeledit.cpp" line="6691"/>
         <source>PITCH</source>
-        <translation>Kąt</translation>
+        <translation>Pochylenie</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="6675"/>
