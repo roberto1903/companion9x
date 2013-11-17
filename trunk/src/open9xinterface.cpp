@@ -49,7 +49,7 @@ Open9xInterface::Open9xInterface(BoardEnum board):
   efile(new EFile())
 {
   o9xservers.clear();
-  o9xservers << "93.51.182.154" << "open9x.9xforums.com";
+  o9xservers << "fw.opentx.it" << "open9x.9xforums.com";
 }
 
 Open9xInterface::~Open9xInterface()
