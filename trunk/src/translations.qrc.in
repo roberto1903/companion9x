@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>companion9x_fr.qm</file>
         <file>companion9x_de.qm</file>
+        <file>companion9x_es.qm</file>
         <file>companion9x_he.qm</file>
         <file>companion9x_it.qm</file>
         <file>companion9x_pl.qm</file>
