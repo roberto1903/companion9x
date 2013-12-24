@@ -76,6 +76,9 @@ void preferencesDialog::baseFirmwareChanged()
         ui->voice_dnld->setEnabled(true);
         ui->sdPathButton->setEnabled(true);
         ui->sdPath->setEnabled(true);
+        ui->ge_label->show();
+        ui->ge_lineedit->show();
+        ui->ge_pathButton->show();
       } else {
         ui->voiceLabel->hide();
         ui->voiceCombo->hide();
@@ -83,6 +86,9 @@ void preferencesDialog::baseFirmwareChanged()
         ui->sdPathButton->hide();
         ui->sdPath->hide();
         ui->sdPathLabel->hide();
+        ui->ge_label->hide();
+        ui->ge_lineedit->hide();
+        ui->ge_pathButton->hide();        
       }
       populateFirmwareOptions(firmware);
       int width=firmware->eepromInterface->getCapability(LCDWidth);
@@ -268,6 +274,7 @@ void preferencesDialog::writeValues()
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());
   settings.setValue("sdPath", ui->sdPath->text());
+  settings.setValue("gePath", ui->ge_lineedit->text());
   settings.setValue("embedded_splashes", ui->splashincludeCB->currentIndex());
   if (!ui->SplashFileName->text().isEmpty()) {
     QImage Image = ui->imageLabel->pixmap()->toImage();
@@ -342,7 +349,10 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
             ui->sdPathButton->show();
             ui->sdPath->show();
             ui->sdPathLabel->show();
-            if (current_firmware_variant.id.contains(opt.name) ||firmware->voice) {
+            ui->ge_label->show();
+            ui->ge_lineedit->show();
+            ui->ge_pathButton->show();           
+          if (current_firmware_variant.id.contains(opt.name) ||firmware->voice) {
               ui->voiceLabel->setEnabled(true);
               ui->voiceCombo->setEnabled(true);
               ui->voice_dnld->setEnabled(true);
@@ -408,6 +418,10 @@ void preferencesDialog::initSettings()
   if (QDir(Path).exists()) {
     ui->sdPath->setText(Path);
   }
+  Path=settings.value("gePath", "").toString();
+  if (QFile(Path).exists()) {
+    ui->ge_lineedit->setText(Path);
+  }  
   Path=settings.value("backupPath", "").toString();
   if (!Path.isEmpty()) {
     if (QDir(Path).exists()) {
@@ -572,6 +586,15 @@ void preferencesDialog::on_backupPathButton_clicked()
     ui->backupPath->setText(fileName);
   }
   ui->backupEnable->setEnabled(true);
+}
+
+void preferencesDialog::on_ge_pathButton_clicked()
+{
+  QSettings settings("companion9x", "companion9x");
+  QString fileName = QFileDialog::getOpenFileName(this, tr("Select Google Earth executable"),ui->ge_lineedit->text());
+  if (!fileName.isEmpty()) {
+    ui->ge_lineedit->setText(fileName);
+  }
 }
 
 void preferencesDialog::on_splashLibraryButton_clicked()
