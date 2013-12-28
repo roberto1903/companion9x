@@ -228,14 +228,30 @@ void logsDialog::on_mapsButton_clicked() {
         .arg(geFile.errorString()));
     return;
   }
-
+  QString latitude,longitude;
+  double flatitude, flongitude;
+  int temp; 
   QTextStream outputStream(&geFile);
   outputStream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n";
   outputStream << "<Document>\n\t<name>flight.kml</name>\n\t<Placemark><name>My Flight</name>\n\t\t<LineString>\n";
   outputStream << "\t\t\t<tessellate>1</tessellate>\n\t\t\t<gx:altitudeMode>relativeToGround</gx:altitudeMode>\n\t\t\t<coordinates>\n\t\t\t\t";
+  
   for (int i=1; i<n; i++) {
     if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
-      outputStream << csvlog.at(i).at(longcol) << "," << csvlog.at(i).at(latcol) << "," << csvlog.at(i).at(altcol) << " " ;
+      latitude=csvlog.at(i).at(latcol).trimmed();
+      longitude=csvlog.at(i).at(longcol).trimmed();
+      qDebug() << latitude.left(latitude.length()-1);
+      temp=int(latitude.left(latitude.length()-1).toFloat()/100);
+      flatitude=temp+(latitude.left(latitude.length()-1).toFloat()-temp*100)/60.0;       
+      temp=int(longitude.left(longitude.length()-1).toFloat()/100);
+      flongitude=temp+(longitude.left(longitude.length()-1).toFloat()-temp*100)/60.0;
+      if (latitude.right(1)!="N") {
+        flatitude*=-1;
+      }
+      if (longitude.right(1)!="E") {
+        flongitude*=-1;
+      }   
+      outputStream << flongitude << "," << flatitude << "," << csvlog.at(i).at(altcol) << " " ;
     }
   }
   outputStream << "\n\t\t\t</coordinates>\n\t\t</LineString>\n\t</Placemark>\n</Document>\n</kml>\n";
