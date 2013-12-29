@@ -61,27 +61,26 @@
 #include "warnings.h"
 #include "open9xinterface.h"
 
-#define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
+#define DONATE_STR      "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
+
 #ifdef __APPLE__
-#define C9X_STAMP "http://fw.opentx.it/download/companion9x-macosx.stamp"
-#define C9X_INSTALLER "/Companion9xMacUpdate.%1.pkg.zip"
-#define C9X_URL   "http://fw.opentx.it/download/Companion9xMacUpdate.%1.pkg.zip"
+  #define C9X_STAMP     OPENTX_COMPANION_DOWNLOADS "/companion-macosx.stamp"
+  #define C9X_INSTALLER "/CompanionMacUpdate.%1.pkg.zip"
 #else
-#define C9X_STAMP "http://fw.opentx.it/download/companion9x.stamp"
-#define C9X_INSTALLER "/companion9xInstall_v%1.exe"
-#define C9X_URL   "http://fw.opentx.it/download/companion9xInstall_v%1.exe"
+  #define C9X_STAMP     OPENTX_COMPANION_DOWNLOADS "/companion-windows.stamp"
+  #define C9X_INSTALLER "/companionInstall_%1.exe"
 #endif
 
 #if defined WIN32 || !defined __GNUC__
-#include <windows.h>
-#define sleep(x) Sleep(x*1000)
+  #include <windows.h>
+  #define sleep(x) Sleep(x*1000)
 #else
-#include <unistd.h>
-#include "mountlist.h"
+  #include <unistd.h>
+  #include "mountlist.h"
 #endif
 
 MainWindow::MainWindow():
-downloadDialog_forWait(NULL)
+  downloadDialog_forWait(NULL)
 {
     mdiArea = new QMdiArea;
     mdiArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -271,14 +270,14 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
 #endif
           if (!fileName.isEmpty()) {
             settings.setValue("lastUpdatesDir", QFileInfo(fileName).dir().absolutePath());
-            downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(version), fileName);
+            downloadDialog * dd = new downloadDialog(this, QString(OPENTX_COMPANION_DOWNLOADS C9X_INSTALLER).arg(version), fileName);
             installer_fileName = fileName;
             connect(dd, SIGNAL(accepted()), this, SLOT(updateDownloaded()));
             dd->show();
           }
         }
 #else
-        QMessageBox::warning(this, tr("New release available"), tr("A new release of companion is available please check companion9x website"));
+        QMessageBox::warning(this, tr("New release available"), tr("A new release of companion is available please check open-tx.org"));
 #endif            
       } else {
         if (showcheckForUpdatesResult && check1done && check2done)
@@ -465,9 +464,6 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
 
       if(!cres) {
         QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
-        int server = settings.value("fwserver",0).toInt();
-        server++;
-        settings.setValue("fwserver",server);
         return;
       }
 
@@ -591,9 +587,6 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
     } else {
       if(check1done && check2done) {
         QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
-        int server = settings.value("fwserver",0).toInt();
-        server++;
-        settings.setValue("fwserver",server);
         return;
       }
     }    
