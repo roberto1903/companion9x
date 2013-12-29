@@ -18,6 +18,9 @@
 
 #include "eeprominterface.h"
 
+#define OPENTX_COMPANION_DOWNLOADS   "http://downloads.open-tx.org/companion"
+#define OPENTX_FIRMWARE_DOWNLOADS    "http://downloads.open-tx.org/firmware"
+
 class EFile;
 
 class Open9xInterface : public EEPROMInterface
