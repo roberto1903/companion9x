@@ -63,13 +63,13 @@
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 #ifdef __APPLE__
-#define C9X_STAMP "http://www.opentx.it/download/companion9x-macosx.stamp"
+#define C9X_STAMP "http://fw.opentx.it/download/companion9x-macosx.stamp"
 #define C9X_INSTALLER "/Companion9xMacUpdate.%1.pkg.zip"
-#define C9X_URL   "http://www.opentx.it/download/Companion9xMacUpdate.%1.pkg.zip"
+#define C9X_URL   "http://fw.opentx.it/download/Companion9xMacUpdate.%1.pkg.zip"
 #else
-#define C9X_STAMP "http://www.opentx.it/download/companion9x.stamp"
+#define C9X_STAMP "http://fw.opentx.it/download/companion9x.stamp"
 #define C9X_INSTALLER "/companion9xInstall_v%1.exe"
-#define C9X_URL   "http://www.opentx.it/download/companion9xInstall_v%1.exe"
+#define C9X_URL   "http://fw.opentx.it/download/companion9xInstall_v%1.exe"
 #endif
 
 #if defined WIN32 || !defined __GNUC__
