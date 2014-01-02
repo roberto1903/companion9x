@@ -533,7 +533,7 @@ void preferencesDialog::on_fw_dnld_clicked()
 void preferencesDialog::on_voice_dnld_clicked()
 {
   ui->ProfSave_PB->setEnabled(true);
-  QString url="http://fw.opentx.it/voices/";
+  QString url="http://downloads.open-tx.org/voices/";
   FirmwareVariant variant = getFirmwareVariant();
   url.append(QString("%1/%2/").arg(variant.firmware->id).arg(ui->voiceCombo->currentText()));
   QDesktopServices::openUrl(url);
