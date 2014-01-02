@@ -293,7 +293,7 @@ void logsDialog::on_mapsButton_clicked() {
   outputStream << "\t\t<Folder>\n\t\t\t<name>Log Data</name>\n\t\t\t<Placemark>\n\t\t\t\t<name>" << planeName << "</name>";
   outputStream << "\n\t\t\t\t<styleUrl>#multiTrack</styleUrl>";
   outputStream << "\n\t\t\t\t<gx:Track>\n";
-  outputStream << "\n\t\t\t\t\t<altitudeMode>relativeToGround</altitudeMode>\n";
+  outputStream << "\n\t\t\t\t\t<altitudeMode>absolute</altitudeMode>\n";
   for (int i=1; i<n; i++) {
     if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
       QString tstamp=csvlog.at(i).at(0)+QString("T")+csvlog.at(i).at(1)+QString("Z");
@@ -315,8 +315,8 @@ void logsDialog::on_mapsButton_clicked() {
       if (longitude.right(1)!="E") {
         flongitude*=-1;
       }
-      latitude.sprintf("%3.6f", flatitude);
-      longitude.sprintf("%3.6f", flongitude);
+      latitude.sprintf("%3.8f", flatitude);
+      longitude.sprintf("%3.8f", flongitude);
       outputStream << "\t\t\t\t\t<gx:coord>" << longitude << " " << latitude << " " << csvlog.at(i).at(altcol).toFloat() << " </gx:coord>\n" ;
     }
   }
