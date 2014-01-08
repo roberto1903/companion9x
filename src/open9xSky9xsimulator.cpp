@@ -110,6 +110,7 @@ namespace Open9xSky9x {
 #include "../opentx/translations/tts_fr.cpp"
 #include "../opentx/translations/tts_pt.cpp"
 #include "../opentx/translations/tts_sk.cpp"
+#include "../opentx/translations/tts_pl.cpp"
 
 int16_t g_anas[NUM_STICKS+BOARD_9X_NUM_POTS];
 
