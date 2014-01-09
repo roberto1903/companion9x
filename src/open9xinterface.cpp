@@ -810,6 +810,9 @@ int Open9xInterface::isAvailable(Protocol proto, int port)
           case PXX_XJT_D8:
           case PXX_XJT_LR12:
           case PXX_DJT:
+          case LP45:
+          case DSM2:
+          case DSMX:
             return 1;
           default:
             return 0;
