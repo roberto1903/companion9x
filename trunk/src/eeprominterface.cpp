@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <list>
+#include <assert.h>
 #include "eeprominterface.h"
 #include "er9xinterface.h"
 #include "th9xinterface.h"
