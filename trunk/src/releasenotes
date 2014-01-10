@@ -2,6 +2,7 @@
 <ul>
 <li>Fix crash when writing certain EEPROMS</li>
 <li>Google Earth export of logs containing GPS positions</li>
+<li>DSM2 added for Taranis</li>
 </ul>
 
 <h2>Version 1.51</h2>
