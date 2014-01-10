@@ -691,6 +691,9 @@ void MainWindow::loadProfile()
       QString firmware_id=settings.value("firmware", default_firmware_variant.id).toString();
       firmware_id.replace("open9x","opentx");
       firmware_id.replace("x9da","taranis");
+      firmware_id.replace("stock", "9x");
+      firmware_id.replace("v4", "gruvin9x");      
+      firmware_id.replace("arm", "sky9x");      
       settings.setValue("firmware", firmware_id);
       settings.endGroup();
       settings.endGroup();
