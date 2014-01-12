@@ -342,8 +342,14 @@ void logsDialog::on_mapsButton_clicked() {
   outputStream << "\t\t\t\t\t\t</SchemaData>\n\t\t\t\t\t</ExtendedData>\n\t\t\t\t</gx:Track>\n\t\t\t</Placemark>\n\t\t</Folder>\n\t</Document>\n</kml>";
   geFile.close();
   
-  QStringList parameters; 
+  QStringList parameters;
+#ifdef __APPLE__
+  gepath = "open"
+  parameters << "-a \"Google Earth\""
   parameters << geFilename;
+#elif
+  parameters << geFilename;
+#endif  
   QProcess *process = new QProcess(this);
   process->start(gePath, parameters);
   ui->FieldsTW->setDisabled(false);
