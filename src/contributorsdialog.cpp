@@ -20,15 +20,16 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
         str.append("</table>");
         str.append("<table width=\"100%\" border=0 cellspacing=0 cellpadding=2>");
         if(file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
-          
+          int columns=6;
+          float cwidth=100.0/columns;
           while (!file.atEnd()) {
             str.append("<tr>");
-            for (int i=0; i<6; i++) {
+            for (int i=0; i<columns; i++) {
               if (!file.atEnd()) {
                 QByteArray line = file.readLine();
-                str.append("<td width=\"16.666%\" class=\"mycss\">"+line.trimmed()+"</td>");
+                str.append(QString("<td width=\"%1%\" class=\"mycss\">").arg(cwidth)+line.trimmed()+"</td>");
               } else {
-                str.append("<td width=\"16.666%\">&nbsp;</td>");
+                str.append(QString("<td width=\"%1%\" class=\"mycss\">").arg(cwidth)+"&nbsp;</td>");
               }
             }
             str.append("</tr>");
