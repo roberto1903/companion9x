@@ -13,7 +13,7 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
         QString str;
         str.append("<html><head>");
         str.append("<style type=\"text/css\">\n");
-        str.append(".mycss\n{\nfont-weight:normal;color:#000000;font-size:10px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;\n}\n");
+        str.append(".mycss\n{\nfont-weight:normal;color:#000000;vertical-align: top;font-size:10px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;\n}\n");
         str.append(".myhead\n{\nfont-weight:bold;color:#000000;font-size:14px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;\n}\n");
         str.append("</style>\n</head><body class=\"mycss\"><table width=\"100%\" border=0 cellspacing=0 cellpadding=2>");
         str.append("<tr><td class=\"myhead\">People who have contributed to this project</td></tr>");
