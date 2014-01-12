@@ -13,8 +13,9 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
         QString str;
         str.append("<html><head>");
         str.append("<style type=\"text/css\">\n");
-        str.append(".mycss\n{\nfont-weight:normal;color:#000000;vertical-align: top;font-size:10px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;\n}\n");
-        str.append(".myhead\n{\nfont-weight:bold;color:#000000;font-size:14px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;\n}\n");
+        str.append(".mycss\n{\nfont-weight:normal;\ncolor:#000000;vertical-align: top;font-size:10px;text-align:left;font-family:arial, helvetica, sans-serif;\n}\n");
+        str.append(".mycssb\n{\nfont-weight:bold;\ncolor:#C00000;vertical-align: top;font-size:10px;text-align:left;font-family:arial, helvetica, sans-serif;\n}\n");
+        str.append(".myhead\n{\nfont-weight:bold;\ncolor:#000000;font-size:14px;text-align:left;font-family:arial, helvetica, sans-serif;\n}\n");
         str.append("</style>\n</head><body class=\"mycss\"><table width=\"100%\" border=0 cellspacing=0 cellpadding=2>");
         str.append("<tr><td class=\"myhead\">"+tr("People who have contributed to this project")+"</td></tr>");
         str.append("</table>");
@@ -25,11 +26,17 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
           while (!file.atEnd()) {
             str.append("<tr>");
             for (int i=0; i<columns; i++) {
+              str.append(QString("<td width=\"%1%\" ").arg(cwidth));
               if (!file.atEnd()) {
                 QByteArray line = file.readLine();
-                str.append(QString("<td width=\"%1%\" class=\"mycss\">").arg(cwidth)+line.trimmed()+"</td>");
+                if (line.contains("monthly") || line.contains("mensual")) {
+                  str.append("class=\"mycssb\">");
+                } else {
+                  str.append("class=\"mycss\">");
+                }
+                str.append(line.trimmed()+"</td>");
               } else {
-                str.append(QString("<td width=\"%1%\" class=\"mycss\">").arg(cwidth)+"&nbsp;</td>");
+                str.append("class=\"mycss\">&nbsp;</td>");
               }
             }
             str.append("</tr>");
@@ -45,12 +52,14 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
           while (!file2.atEnd()) {
             str.append("<tr>");
             for (int i=0; i<3; i++) {
+              str.append("<td width=\"33.33%\" class=\"mycss\">");
               if (!file2.atEnd()) {
                 QByteArray line = file2.readLine();
-                str.append("<td width=\"33.33%\" class=\"mycss\">"+line.trimmed()+"</td>");
+                str.append(line.trimmed());
               } else {
-                str.append("<td  width=\"33.33%\">&nbsp;</td>");
+                str.append("&nbsp;");
               }
+              str.append("</td>");
             }
             str.append("</tr>");
           }
