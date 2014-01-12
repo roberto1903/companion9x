@@ -16,7 +16,7 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
         str.append(".mycss\n{\nfont-weight:normal;color:#000000;vertical-align: top;font-size:10px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;\n}\n");
         str.append(".myhead\n{\nfont-weight:bold;color:#000000;font-size:14px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;\n}\n");
         str.append("</style>\n</head><body class=\"mycss\"><table width=\"100%\" border=0 cellspacing=0 cellpadding=2>");
-        str.append("<tr><td class=\"myhead\">People who have contributed to this project</td></tr>");
+        str.append("<tr><td class=\"myhead\">"+tr("People who have contributed to this project")+"</td></tr>");
         str.append("</table>");
         str.append("<table width=\"100%\" border=0 cellspacing=0 cellpadding=2>");
         if(file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
@@ -37,7 +37,7 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
         str.append("</table>");
         QFile file2(":/coders");
         str.append("<table width=\"100%\" border=0 cellspacing=0 cellpadding=2>");
-        str.append("<tr><td class=\"myhead\">Coders</td></tr>");
+        str.append("<tr><td class=\"myhead\">"+tr("Coders")+"</td></tr>");
         str.append("</table>");
         str.append("<table width=\"100%\" border=0 cellspacing=0 cellpadding=2>");
         if(file2.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
@@ -53,7 +53,11 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnu
             }
             str.append("</tr>");
           }
-          str.append("</table></body></html>");
+          
+          str.append("<tr><td colspan=3 class=\"mycss\">"+tr("Honors go to Rafal Tomczak (RadioClone) and Thomas Husterer (th9x) of course.<br> Also to Erez Raviv (er9x) and it's fantastic eePe, from which\ncompanion9x was forked out.")+"</td></tr>");
+          str.append("<tr><td colspan=3 class=\"mycss\">"+tr("Thank you all !!!")+"</td></tr>");
+          str.append("</table>");
+          str.append("</body></html>");
         }
         ui->textBrowser->setHtml(str,QUrl(""));
         ui->textBrowser->scroll(0,0);
