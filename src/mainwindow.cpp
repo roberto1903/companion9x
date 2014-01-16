@@ -93,6 +93,9 @@ MainWindow::MainWindow():
             this, SLOT(setActiveSubWindow(QWidget*)));
 
     MaxRecentFiles=MAX_RECENT;
+    QSettings settings("companion9x", "companion9x");
+    restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
+
     createActions();
     createMenus();
     createToolBars();
@@ -594,7 +597,11 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+  
     mdiArea->closeAllSubWindows();
+    QSettings settings("companion9x", "companion9x");
+    settings.setValue("mainWindowGeometry", saveGeometry());
+    settings.setValue("mainWindowState", saveState());
     if (mdiArea->currentSubWindow()) {
       event->ignore();
     } else {
@@ -1861,6 +1868,7 @@ QMenu *MainWindow::createProfilesMenu()
 void MainWindow::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
+    fileToolBar->setObjectName("files");
     fileToolBar->addAction(newAct);
     fileToolBar->addAction(openAct);
     QToolButton * recentToolButton = new QToolButton;
@@ -1898,11 +1906,13 @@ void MainWindow::createToolBars()
     fileToolBar->addAction(compareAct);
 
     editToolBar = addToolBar(tr("Edit"));
+    editToolBar->setObjectName("Edit");
     editToolBar->addAction(cutAct);
     editToolBar->addAction(copyAct);
     editToolBar->addAction(pasteAct);
 
     burnToolBar = addToolBar(tr("Burn"));
+    burnToolBar->setObjectName("Burn");
     burnToolBar->addAction(burnToAct);
     burnToolBar->addAction(burnFromAct);
     burnToolBar->addSeparator();
@@ -1915,6 +1925,7 @@ void MainWindow::createToolBars()
     burnToolBar->addAction(burnConfigAct);
 
     helpToolBar = addToolBar(tr("Help"));
+    helpToolBar->setObjectName("Help");
     helpToolBar->addAction(aboutAct);
     helpToolBar->addAction(checkForUpdatesAct);
 }
@@ -1927,10 +1938,7 @@ void MainWindow::createStatusBar()
 void MainWindow::readSettings()
 {
     QSettings settings("companion9x", "companion9x");
-    bool maximized = settings.value("maximized", false).toBool();
-    QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
-    QSize size = settings.value("size", QSize(400, 400)).toSize();
-
+    restoreState(settings.value("mainWindowState").toByteArray());
     checkCompanion9x = settings.value("startup_check_companion9x", true).toBool();
     checkFW = settings.value("startup_check_fw", true).toBool();
     MaxRecentFiles =settings.value("history_size",10).toInt();
@@ -1942,12 +1950,6 @@ void MainWindow::readSettings()
       ActiveProfileName=settings.value("Name","").toString();
       settings.endGroup();
       settings.endGroup();
-    }
-    if (maximized) {
-      setWindowState(Qt::WindowMaximized);
-    } else {
-      move(pos);
-      resize(size);
     }
 }
 
