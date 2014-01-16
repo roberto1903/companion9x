@@ -343,11 +343,11 @@ void logsDialog::on_mapsButton_clicked() {
   geFile.close();
   QStringList parameters;
 #ifdef __APPLE__
-    gePath = "/usr/bin/open";
-    parameters << "-a";
-    parameters << "Google\ Earth";
+  gePath = "/usr/bin/open";
+  parameters << "-a";
+  parameters << "Google\ Earth";
 #endif
-    parameters << geFilename;
+  parameters << geFilename;
   QProcess *process = new QProcess(this);
   process->start(gePath, parameters);
   ui->FieldsTW->setDisabled(false);
