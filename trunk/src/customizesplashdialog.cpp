@@ -23,41 +23,46 @@ void customizeSplashDialog::on_FlashLoadButton_clicked()
 {
   QString fileName;
   QSettings settings("companion9x", "companion9x");
-  ui->ImageLoadButton->setDisabled(true);
-  ui->libraryButton->setDisabled(true);
-  ui->SaveFlashButton->setDisabled(true);
-  ui->SaveImageButton->setDisabled(true);
-  ui->ImageFileName->clear();
-  ui->imageLabel->clear();
-  ui->HowToLabel->clear();
-  ui->HowToLabel->setStyleSheet("background:rgb(255, 255, 0)");
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
-  QFile file(fileName);
-  if (!file.exists()) {
-    ui->FWFileName->clear();
-    ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
-    return;    
+  if (!fileName.isEmpty()) {
+    ui->ImageLoadButton->setDisabled(true);
+    ui->libraryButton->setDisabled(true);
+    ui->SaveFlashButton->setDisabled(true);
+    ui->SaveImageButton->setDisabled(true);
+    ui->InvertColorButton->setDisabled(true);
+    ui->ImageFileName->clear();
+    ui->imageLabel->clear();
+    ui->HowToLabel->clear();
+    ui->HowToLabel->setStyleSheet("background:rgb(255, 255, 0)");
+    fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
+    QFile file(fileName);
+    if (!file.exists()) {
+      ui->FWFileName->clear();
+      ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
+      return;    
+    }
+    if (fileName.isEmpty()) {
+      ui->FWFileName->clear();
+      ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
+      return;
+    }
+
+    ui->FWFileName->setText(fileName);
+    FlashInterface flash(fileName);
+    if (flash.hasSplash()) {
+      ui->HowToLabel->append("<center>" + tr("Select an image to customize your splash <br />or save actual firmware splash") + "</center>");
+      ui->ImageLoadButton->setEnabled(true);
+      ui->libraryButton->setEnabled(true);
+      ui->SaveImageButton->setEnabled(true);
+      ui->InvertColorButton->setEnabled(true);
+      ui->imageLabel->setPixmap(QPixmap::fromImage(flash.getSplash()));
+      ui->imageLabel->setFixedSize(flash.getSplashWidth()*2,flash.getSplashHeight()*2);
+    } else {
+      QMessageBox::information(this, tr("Error"), tr("Could not find bitmap to replace in file"));
+      return;
+    }
+    settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
   }
-  if (fileName.isEmpty()) {
-    ui->FWFileName->clear();
-    ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
-    return;
-  }
-  
-  ui->FWFileName->setText(fileName);
-  FlashInterface flash(fileName);
-  if (flash.hasSplash()) {
-    ui->HowToLabel->append("<center>" + tr("Select an image to customize your splash <br />or save actual firmware splash") + "</center>");
-    ui->ImageLoadButton->setEnabled(true);
-    ui->libraryButton->setEnabled(true);
-    ui->SaveImageButton->setEnabled(true);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(flash.getSplash()));
-    ui->imageLabel->setFixedSize(flash.getSplashWidth()*2,flash.getSplashHeight()*2);
-  } else {
-    QMessageBox::information(this, tr("Error"), tr("Could not find bitmap to replace in file"));
-    return;
-  }
-  settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
 }
 
 void customizeSplashDialog::on_ImageLoadButton_clicked() {
@@ -168,9 +173,11 @@ void customizeSplashDialog::on_SaveFlashButton_clicked()
 
 void customizeSplashDialog::on_InvertColorButton_clicked()
 {
-  QImage image = ui->imageLabel->pixmap()->toImage();
-  image.invertPixels();
-  ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+  if (ui->imageLabel->pixmap()) {
+    QImage image = ui->imageLabel->pixmap()->toImage();
+    image.invertPixels();
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+  }
 }
 
 void customizeSplashDialog::on_SaveImageButton_clicked()

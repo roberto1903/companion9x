@@ -980,6 +980,12 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
+  } else if (flags & POPULATE_TELEMETRYRED) {
+    for (int i=0; i<TELEMETRY_SOURCE_ACCX; i++) {
+      item = RawSource(SOURCE_TYPE_TELEMETRY, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
   }
 
   if (flags & POPULATE_GVARS) {
@@ -1294,6 +1300,10 @@ float getBarValue(int barId, int value, FrSkyData *fd)
     case TELEMETRY_SOURCE_CELLS_SUM:
     case TELEMETRY_SOURCE_VFAS:
       return value/10.0;
+    case TELEMETRY_SOURCE_ACCX:
+    case TELEMETRY_SOURCE_ACCY:
+    case TELEMETRY_SOURCE_ACCZ:      
+      return value/100.0;
     case TELEMETRY_SOURCE_HDG:
       return std::min(359, value*2);
     case TELEMETRY_SOURCE_DIST_MAX:

@@ -2441,7 +2441,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchValue[i]->setVisible(false);
-        populateSourceCB(cswitchSource1[i], source, POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
+        populateSourceCB(cswitchSource1[i], source, POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRYRED | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         if (source.type==SOURCE_TYPE_TELEMETRY && (source.index==1 || source.index==2)) {
           cswitchTOffset[i]->setVisible(true);
           cswitchOffset[i]->setVisible(false);
@@ -3553,6 +3553,9 @@ void ModelEdit::tabTelemetry()
           maxsb[j]->setDecimals(1);
           break;
         case TELEMETRY_SOURCE_CELL:
+        case TELEMETRY_SOURCE_ACCX:
+        case TELEMETRY_SOURCE_ACCY:
+        case TELEMETRY_SOURCE_ACCZ:  
           minsb[j]->setDecimals(2);
           maxsb[j]->setDecimals(2);
           break;
@@ -5006,6 +5009,9 @@ void ModelEdit::telBarCBcurrentIndexChanged(int index)
         maxSB[bar]->setDecimals(1);
         break;
       case TELEMETRY_SOURCE_CELL:
+      case TELEMETRY_SOURCE_ACCX:
+      case TELEMETRY_SOURCE_ACCY:
+      case TELEMETRY_SOURCE_ACCZ:
         minSB[bar]->setDecimals(2);
         maxSB[bar]->setDecimals(2);
         break;

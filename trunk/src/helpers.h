@@ -56,6 +56,7 @@ QString getProtocolStr(const int proto);
 #define POPULATE_GVARS         8
 #define POPULATE_TELEMETRY    16
 #define POPULATE_TELEMETRYEXT 32
+#define POPULATE_TELEMETRYRED 64
 
 #define GVARS_VARIANT 0x0001
 #define FRSKY_VARIANT 0x0002
