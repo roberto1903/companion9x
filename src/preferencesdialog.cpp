@@ -259,6 +259,7 @@ void preferencesDialog::writeValues()
   
   settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
   settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
+  settings.setValue("icon_size", ui->Iconsize_CB->currentIndex());
   settings.setValue("custom_id", ui->CUSTOM_ID_LE->text());
   settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
   settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
@@ -400,6 +401,7 @@ void preferencesDialog::initSettings()
   }
   ui->channelorderCB->setCurrentIndex(settings.value("default_channel_order", 0).toInt());
   ui->stickmodeCB->setCurrentIndex(settings.value("default_mode", 1).toInt());
+  ui->Iconsize_CB->setCurrentIndex(settings.value("icon_size", 1).toInt());
   ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
   ui->renameFirmware->setChecked(settings.value("rename_firmware_files", false).toBool());
   ui->wizardEnable_ChkB->setChecked(settings.value("wizardEnable", true).toBool());
