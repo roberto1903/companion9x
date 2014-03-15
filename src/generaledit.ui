@@ -110,7 +110,7 @@
 These will be relevant for all models in the same EEPROM.</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabSetup">
       <attribute name="title">
@@ -2883,6 +2883,9 @@ Acceptable values are 5v..10v</string>
          </property>
          <property name="maximum">
           <double>5.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
          </property>
          <property name="value">
           <double>1.000000000000000</double>
