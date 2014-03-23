@@ -34,7 +34,6 @@ void customizeSplashDialog::on_FlashLoadButton_clicked()
     ui->imageLabel->clear();
     ui->HowToLabel->clear();
     ui->HowToLabel->setStyleSheet("background:rgb(255, 255, 0)");
-    fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
     QFile file(fileName);
     if (!file.exists()) {
       ui->FWFileName->clear();
